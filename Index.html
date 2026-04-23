@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia Clínica Homeopática</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Historia Clínica Homeopática</h1>
+            <div class="fecha-actual" id="fechaActual"></div>
+        </div>
+
+        <!-- SECCIÓN DE BÚSQUEDA -->
+        <div class="busqueda-container">
+            <div class="busqueda-header">
+                <h2>🔍 Buscar Paciente Existente</h2>
+                <button type="button" onclick="toggleBuscador()" class="btn-toggle">
+                    <span id="buscadorToggle">Mostrar Buscador</span>
+                </button>
+            </div>
+            
+            <div id="buscadorSection" class="buscador-section" style="display: none;">
+                <div class="busqueda-form">
+                    <div class="campo-busqueda">
+                        <label for="buscarNombre">Buscar por nombre:</label>
+                        <input type="text" id="buscarNombre" placeholder="Escriba el nombre..." onkeyup="buscarEnTiempoReal(this.value, 'nombre')">
+                    </div>
+                    
+                    <div class="campo-busqueda">
+                        <label for="buscarApellido">Buscar por apellido:</label>
+                        <input type="text" id="buscarApellido" placeholder="Escriba el apellido..." onkeyup="buscarEnTiempoReal(this.value, 'apellido')">
+                    </div>
+                    
+                    <button type="button" onclick="limpiarBusqueda()" class="btn-secondary">Limpiar</button>
+                </div>
+
+                <!-- RESULTADOS DE BÚSQUEDA -->
+                <div id="resultadosBusqueda" class="resultados-container"></div>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <form id="historialForm">
+                <!-- SECCIÓN 1: DATOS BÁSICOS -->
+                <section class="seccion collapsed">
+                    <div class="seccion-header" onclick="toggleSeccion(this)">
+                        <h2>Datos Básicos del Paciente</h2>
+                        <div class="seccion-controles">
+                            <button type="button" onclick="limpiarSeccionRapida(0)" class="btn-limpiar" title="Limpiar esta sección">🗑️</button>
+                            <span class="seccion-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="seccion-content">
+                        <!-- NOMBRE Y APELLIDO -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label for="nombre">Nombre(s):</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="campo-mitad">
+                                <label for="apellido">Apellido(s):</label>
+                                <input type="text" id="apellido" name="apellido" required>
+                            </div>
+                        </div>
+                    
+                        <div class="campo">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                    
+                        <!-- EDAD Y SEXO -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label for="edad">Edad:</label>
+                                <input type="number" id="edad" name="edad" min="0" max="120" required>
+                            </div>
+                            <div class="campo-mitad">
+                                <label>Sexo:</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="sexo" value="Masculino" required> Masculino</label>
+                                    <label><input type="radio" name="sexo" value="Femenino" required> Femenino</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- OCUPACIÓN Y ESTADO CIVIL -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label for="ocupacion">Ocupación:</label>
+                                <select id="ocupacion" name="ocupacion" onchange="toggleOtroOcupacion()">
+                                    <option value="">Seleccionar</option>
+                                    <option value="Estudiante">Estudiante</option>
+                                    <option value="Empleado">Empleado</option>
+                                    <option value="Profesionista">Profesionista</option>
+                                    <option value="Comerciante">Comerciante</option>
+                                    <option value="Ama de casa">Ama de casa</option>
+                                    <option value="Jubilado">Jubilado</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="campo-mitad">
+                                <label>Estado Civil:</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="estadoCivil" value="Soltero" onchange="toggleDatosConyuge()" required> Soltero</label>
+                                    <label><input type="radio" name="estadoCivil" value="Casado" onchange="toggleDatosConyuge()" required> Casado</label>
+                                    <label><input type="radio" name="estadoCivil" value="Viudo/a" onchange="toggleDatosConyuge()" required> Viudo/a</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- CAMPO OCUPACIÓN OTRO (si es necesario) -->
+                        <div class="campo" id="ocupacionOtraContainer" style="display: none;">
+                            <label for="ocupacionOtra">Especificar ocupación:</label>
+                            <input type="text" id="ocupacionOtra" name="ocupacionOtra" placeholder="Escriba su ocupación">
+                        </div>
+                    
+                        <!-- DATOS DEL CÓNYUGE (solo si está casado) -->
+                        <div id="datosConyuge" style="display: none;">
+                            <div class="campo-doble">
+                                <div class="campo-mitad">
+                                    <label for="nombreConyuge">Nombre del cónyuge:</label>
+                                    <input type="text" id="nombreConyuge" name="nombreConyuge">
+                                </div>
+                                <div class="campo-mitad">
+                                    <label for="edadConyuge">Edad del cónyuge:</label>
+                                    <input type="number" id="edadConyuge" name="edadConyuge" min="0" max="120">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2: INFORMACIÓN FAMILIAR -->
+                <section class="seccion collapsed">
+                    <div class="seccion-header" onclick="toggleSeccion(this)">
+                        <h2>Información Familiar</h2>
+                        <div class="seccion-controles">
+                            <button type="button" onclick="limpiarSeccionRapida(1)" class="btn-limpiar" title="Limpiar esta sección">🗑️</button>
+                            <span class="seccion-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="seccion-content">
+                        <!-- DATOS DEL PADRE -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label for="nombrePadre">Nombre del padre:</label>
+                                <input type="text" id="nombrePadre" name="nombrePadre">
+                            </div>
+                            <div class="campo-mitad">
+                                <label for="edadPadre">Edad del padre:</label>
+                                <input type="number" id="edadPadre" name="edadPadre" min="0" max="120">
+                            </div>
+                        </div>
+                        
+                        <!-- DATOS DE LA MADRE -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label for="nombreMadre">Nombre de la madre:</label>
+                                <input type="text" id="nombreMadre" name="nombreMadre">
+                            </div>
+                            <div class="campo-mitad">
+                                <label for="edadMadre">Edad de la madre:</label>
+                                <input type="number" id="edadMadre" name="edadMadre" min="0" max="120">
+                            </div>
+                        </div>
+                    
+                        <!-- HERMANOS -->
+                        <div class="campo">
+                            <label>¿Tiene hermanos?</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="tieneHermanos" value="No" onchange="toggleHermanos()" required> No</label>
+                                <label><input type="radio" name="tieneHermanos" value="Si" onchange="toggleHermanos()" required> Sí</label>
+                            </div>
+                        </div>
+                    
+                        <div id="datosHermanos" style="display: none;">
+                            <div class="campo">
+                                <label for="numeroHermanos">¿Cuántos hermanos tiene?</label>
+                                <input type="number" id="numeroHermanos" name="numeroHermanos" min="1" max="20" onchange="generarCamposHermanos()">
+                            </div>
+                            <div id="nombresHermanos"></div>
+                        </div>
+                    
+                        <!-- HIJOS -->
+                        <div class="campo">
+                            <label>¿Tiene hijos?</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="tieneHijos" value="No" onchange="toggleHijos()" required> No</label>
+                                <label><input type="radio" name="tieneHijos" value="Si" onchange="toggleHijos()" required> Sí</label>
+                            </div>
+                        </div>
+                    
+                        <div id="datosHijos" style="display: none;">
+                            <div class="campo">
+                                <label for="numeroHijos">¿Cuántos hijos tiene?</label>
+                                <input type="number" id="numeroHijos" name="numeroHijos" min="1" max="20" onchange="generarCamposHijos()">
+                            </div>
+                            <div id="nombresHijos"></div>
+                        </div>
+                    
+                        <!-- ANTECEDENTES FAMILIARES -->
+                        <div class="campo">
+                            <label for="antecedentesFamiliares">Antecedentes familiares importantes:</label>
+                            <textarea id="antecedentesFamiliares" name="antecedentesFamiliares" placeholder="Ej: Diabetes, hipertensión, cáncer, problemas cardíacos, etc."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3: HISTORIAL MÉDICO -->
+                <section class="seccion collapsed">
+                    <div class="seccion-header" onclick="toggleSeccion(this)">
+                        <h2>Historial Médico</h2>
+                        <div class="seccion-controles">
+                            <button type="button" onclick="limpiarSeccionRapida(2)" class="btn-limpiar" title="Limpiar esta sección">🗑️</button>
+                            <span class="seccion-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="seccion-content">
+                        <!-- CIRUGÍAS Y MEDICAMENTOS -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label>¿Ha tenido cirugías?</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="tieneCirugias" value="No" onchange="toggleCirugias()" required> No</label>
+                                    <label><input type="radio" name="tieneCirugias" value="Si" onchange="toggleCirugias()" required> Sí</label>
+                                </div>
+                            </div>
+                            <div class="campo-mitad">
+                                <label>¿Toma medicamentos actualmente?</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="tomaMedicamentos" value="No" onchange="toggleMedicamentos()" required> No</label>
+                                    <label><input type="radio" name="tomaMedicamentos" value="Si" onchange="toggleMedicamentos()" required> Sí</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- DETALLES DE CIRUGÍAS (si las tiene) -->
+                        <div id="datosCirugias" style="display: none;">
+                            <div class="campo">
+                                <label for="detalleCirugias">Describa las cirugías y fechas aproximadas:</label>
+                                <textarea id="detalleCirugias" name="detalleCirugias" placeholder="Ej: Apendicetomía 2015, Cesárea 2020, etc."></textarea>
+                            </div>
+                        </div>
+                    
+                        <!-- LISTA DE MEDICAMENTOS (si toma) -->
+                        <div id="datosMedicamentos" style="display: none;">
+                            <div class="campo">
+                                <label for="listaMedicamentos">Liste los medicamentos que toma:</label>
+                                <textarea id="listaMedicamentos" name="listaMedicamentos" placeholder="Ej: Metformina 500mg c/12hrs, Losartán 50mg c/24hrs, etc."></textarea>
+                            </div>
+                        </div>
+                    
+                        <!-- ALERGIAS Y HOSPITALIZACIONES -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label>¿Tiene alergias conocidas?</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="tieneAlergias" value="No" onchange="toggleAlergias()" required> No</label>
+                                    <label><input type="radio" name="tieneAlergias" value="Si" onchange="toggleAlergias()" required> Sí</label>
+                                </div>
+                            </div>
+                            <div class="campo-mitad">
+                                <label>¿Ha estado hospitalizado?</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="hospitalizaciones" value="No" onchange="toggleHospitalizaciones()" required> No</label>
+                                    <label><input type="radio" name="hospitalizaciones" value="Si" onchange="toggleHospitalizaciones()" required> Sí</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- DETALLES DE ALERGIAS (si las tiene) -->
+                        <div id="datosAlergias" style="display: none;">
+                            <div class="campo">
+                                <label for="listaAlergias">Describa las alergias:</label>
+                                <textarea id="listaAlergias" name="listaAlergias" placeholder="Ej: Penicilina, polen, mariscos, etc."></textarea>
+                            </div>
+                        </div>
+                    
+                        <!-- DETALLES DE HOSPITALIZACIONES (si las ha tenido) -->
+                        <div id="datosHospitalizaciones" style="display: none;">
+                            <div class="campo">
+                                <label for="detalleHospitalizaciones">Describa hospitalizaciones y fechas:</label>
+                                <textarea id="detalleHospitalizaciones" name="detalleHospitalizaciones" placeholder="Ej: Neumonía 2018 (5 días), COVID-19 2021 (10 días), etc."></textarea>
+                            </div>
+                        </div>
+                    
+                        <!-- ENFERMEDADES CRÓNICAS -->
+                        <div class="campo">
+                            <label>¿Padece alguna enfermedad crónica?</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="enfermedadesCronicas" value="No" onchange="toggleCronicas()" required> No</label>
+                                <label><input type="radio" name="enfermedadesCronicas" value="Si" onchange="toggleCronicas()" required> Sí</label>
+                            </div>
+                        </div>
+                    
+                        <!-- LISTA DE ENFERMEDADES CRÓNICAS (si las tiene) -->
+                        <div id="datosCronicas" style="display: none;">
+                            <div class="campo">
+                                <label for="listaCronicas">Enumere las enfermedades crónicas:</label>
+                                <textarea id="listaCronicas" name="listaCronicas" placeholder="Ej: Diabetes tipo 2, Hipertensión arterial, Artritis, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4: PERFIL HOMEOPÁTICO -->
+                <section class="seccion collapsed">
+                    <div class="seccion-header" onclick="toggleSeccion(this)">
+                        <h2>Perfil Homeopático</h2>
+                        <div class="seccion-controles">
+                            <button type="button" onclick="limpiarSeccionRapida(3)" class="btn-limpiar" title="Limpiar esta sección">🗑️</button>
+                            <span class="seccion-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="seccion-content">
+                        <!-- MOTIVO DE CONSULTA -->
+                        <div class="campo">
+                            <label for="motivoConsulta">Motivo principal de la consulta:</label>
+                            <textarea id="motivoConsulta" name="motivoConsulta" placeholder="Describa el problema que lo trae a consulta..." required></textarea>
+                        </div>
+                    
+                        <div class="campo">
+                            <label for="tiempoEvolucion">¿Desde cuándo presenta este problema?</label>
+                            <input type="text" id="tiempoEvolucion" name="tiempoEvolucion" placeholder="Ej: 3 meses, 1 año, desde la infancia...">
+                        </div>
+                    
+                        <!-- CARÁCTER Y PERSONALIDAD -->
+                        <div class="campo">
+                            <label for="caracter">Describa su carácter/personalidad:</label>
+                            <textarea id="caracter" name="caracter" placeholder="Ej: Tímido, extrovertido, irritable, tranquilo, ansioso, etc."></textarea>
+                        </div>
+                    
+                        <!-- MIEDOS Y PREFERENCIAS ALIMENTARIAS -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label>¿Tiene miedos específicos o fobias?</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="tieneMiedos" value="No" onchange="toggleMiedos()" required> No</label>
+                                    <label><input type="radio" name="tieneMiedos" value="Si" onchange="toggleMiedos()" required> Sí</label>
+                                </div>
+                            </div>
+                            <div class="campo-mitad">
+                                <label>¿Tiene preferencias alimentarias marcadas?</label>
+                                <div class="radio-group-inline">
+                                    <label><input type="radio" name="tienePreferencias" value="No" onchange="togglePreferencias()" required> No</label>
+                                    <label><input type="radio" name="tienePreferencias" value="Si" onchange="togglePreferencias()" required> Sí</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- DETALLES DE MIEDOS (si los tiene) -->
+                        <div id="datosMiedos" style="display: none;">
+                            <div class="campo">
+                                <label for="listaMiedos">Describa sus miedos o fobias:</label>
+                                <textarea id="listaMiedos" name="listaMiedos" placeholder="Ej: Miedo a la oscuridad, a las alturas, a los espacios cerrados, etc."></textarea>
+                            </div>
+                        </div>
+                    
+                        <!-- SÍNTOMAS FÍSICOS ACTUALES -->
+                        <div class="campo">
+                            <label for="sintomasFisicos">Síntomas físicos actuales (además del motivo principal):</label>
+                            <textarea id="sintomasFisicos" name="sintomasFisicos" placeholder="Ej: Dolores de cabeza, problemas digestivos, cansancio, etc."></textarea>
+                        </div>
+                    
+                        <!-- SUEÑO Y APETITO -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label for="patronSueno">Patrón de sueño:</label>
+                                <select id="patronSueno" name="patronSueno">
+                                    <option value="">Seleccionar</option>
+                                    <option value="Duerme bien">Duerme bien (7-8 horas)</option>
+                                    <option value="Insomnio inicial">Dificultad para conciliar</option>
+                                    <option value="Insomnio intermedio">Se despierta frecuentemente</option>
+                                    <option value="Insomnio terminal">Se despierta muy temprano</option>
+                                    <option value="Sueño no reparador">Duerme pero no descansa</option>
+                                    <option value="Hipersomnia">Duerme demasiado</option>
+                                </select>
+                            </div>
+                            <div class="campo-mitad">
+                                <label for="apetito">Apetito:</label>
+                                <select id="apetito" name="apetito">
+                                    <option value="">Seleccionar</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Aumentado">Aumentado</option>
+                                    <option value="Disminuido">Disminuido</option>
+                                    <option value="Caprichoso">Caprichoso/Variable</option>
+                                    <option value="Sin apetito">Sin apetito</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <!-- PREFERENCIAS ALIMENTARIAS DETALLADAS (si las tiene) -->
+                        <div id="datosPreferencias" style="display: none;">
+                            <!-- SALADO Y DULCE -->
+                            <div class="campo-doble">
+                                <div class="campo-mitad">
+                                    <label for="prefiereSalado">Prefiere salado:</label>
+                                    <select id="prefiereSalado" name="prefiereSalado">
+                                        <option value="">No específico</option>
+                                        <option value="Mucho">Mucho</option>
+                                        <option value="Poco">Poco</option>
+                                        <option value="Nada">Nada</option>
+                                    </select>
+                                </div>
+                                <div class="campo-mitad">
+                                    <label for="prefiereDulce">Prefiere dulce:</label>
+                                    <select id="prefiereDulce" name="prefiereDulce">
+                                        <option value="">No específico</option>
+                                        <option value="Mucho">Mucho</option>
+                                        <option value="Poco">Poco</option>
+                                        <option value="Nada">Nada</option>
+                                    </select>
+                                </div>
+                            </div>
+                    
+                            <!-- CALIENTE Y FRÍO -->
+                            <div class="campo-doble">
+                                <div class="campo-mitad">
+                                    <label for="prefiereCaliente">Prefiere comidas calientes:</label>
+                                    <select id="prefiereCaliente" name="prefiereCaliente">
+                                        <option value="">No específico</option>
+                                        <option value="Siempre">Siempre</option>
+                                        <option value="A veces">A veces</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </div>
+                                <div class="campo-mitad">
+                                    <label for="prefiereFrio">Prefiere comidas frías:</label>
+                                    <select id="prefiereFrio" name="prefiereFrio">
+                                        <option value="">No específico</option>
+                                        <option value="Siempre">Siempre</option>
+                                        <option value="A veces">A veces</option>
+                                        <option value="Nunca">Nunca</option>
+                                    </select>
+                                </div>
+                            </div>
+                    
+                            <!-- OTRAS PREFERENCIAS -->
+                            <div class="campo">
+                                <label for="otrasPreferencias">Otras preferencias alimentarias:</label>
+                                <textarea id="otrasPreferencias" name="otrasPreferencias" placeholder="Ej: Evita lácteos, le gusta mucho el picante, etc."></textarea>
+                            </div>
+                        </div>
+                    
+                        <!-- ESTADO EMOCIONAL -->
+                        <div class="campo">
+                            <label for="estadoEmocional">Estado emocional actual:</label>
+                            <textarea id="estadoEmocional" name="estadoEmocional" placeholder="Ej: Ansioso por trabajo, triste por pérdida, estresado, tranquilo, etc."></textarea>
+                        </div>
+                    
+                        <!-- FACTORES AGRAVANTES Y MEJORANTES -->
+                        <div class="campo-doble">
+                            <div class="campo-mitad">
+                                <label for="mejoraCon">Sus síntomas mejoran con:</label>
+                                <textarea id="mejoraCon" name="mejoraCon" placeholder="Ej: Reposo, calor, frío, movimiento, compañía, etc."></textarea>
+                            </div>
+                            <div class="campo-mitad">
+                                <label for="empeoraCon">Sus síntomas empeoran con:</label>
+                                <textarea id="empeoraCon" name="empeoraCon" placeholder="Ej: Estrés, frío, calor, humedad, ruidos, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Botones finales -->
+                <div class="botones-finales">
+                    <button type="submit" class="btn-primary">Guardar Historial</button>
+                    <button type="button" onclick="limpiarTodoRapido()" class="btn-danger-small">
+                        🗑️ Limpiar Todo
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación personalizado -->
+    <div id="modalExito" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="check-icon">✅</span>
+                <h3>¡Historial Guardado!</h3>
+            </div>
+            <p>El historial clínico se ha guardado exitosamente en la base de datos.</p>
+            <button onclick="cerrarModal()" class="btn-primary">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
