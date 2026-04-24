@@ -376,16 +376,16 @@
                         <div class="pregunta-fila">
                             <label>¿Cuál es tu comida dulce preferida?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="comida_dulce" value="helado" id="dulce_helado">
+                                <input type="radio" name="comida_dulce" value="helado" id="dulce_helado" onchange="manejarComidaDulce()">
                                 <label for="dulce_helado">Helado</label>
                                 
-                                <input type="radio" name="comida_dulce" value="chocolate" id="dulce_chocolate">
+                                <input type="radio" name="comida_dulce" value="chocolate" id="dulce_chocolate" onchange="manejarComidaDulce()">
                                 <label for="dulce_chocolate">Chocolate</label>
                                 
-                                <input type="radio" name="comida_dulce" value="pan" id="dulce_pan">
+                                <input type="radio" name="comida_dulce" value="pan" id="dulce_pan" onchange="manejarComidaDulce()">
                                 <label for="dulce_pan">Pan/Postres</label>
                                 
-                                <input type="radio" name="comida_dulce" value="otros" id="dulce_otros" onchange="testToggle()">
+                                <input type="radio" name="comida_dulce" value="otros" id="dulce_otros" onchange="manejarComidaDulce()">
                                 <label for="dulce_otros">Otros</label>
                                 
                                 <div id="otros-dulce-container" style="display: none; margin-top: 10px;">
@@ -398,16 +398,16 @@
                         <div class="pregunta-fila">
                             <label>¿Cuál es tu comida salada preferida?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="comida_salada" value="pollo" id="salada_pollo">
+                                <input type="radio" name="comida_salada" value="pollo" id="salada_pollo" onchange="toggleOtrosSalada()">
                                 <label for="salada_pollo">Pollo</label>
                                 
-                                <input type="radio" name="comida_salada" value="pescado" id="salada_pescado">
+                                <input type="radio" name="comida_salada" value="pescado" id="salada_pescado" onchange="toggleOtrosSalada()">
                                 <label for="salada_pescado">Pescado</label>
                                 
-                                <input type="radio" name="comida_salada" value="carne" id="salada_carne">
+                                <input type="radio" name="comida_salada" value="carne" id="salada_carne" onchange="toggleOtrosSalada()">
                                 <label for="salada_carne">Carne</label>
                                 
-                                <input type="radio" name="comida_salada" value="caldos" id="salada_caldos">
+                                <input type="radio" name="comida_salada" value="caldos" id="salada_caldos" onchange="toggleOtrosSalada()">
                                 <label for="salada_caldos">Caldos/Sopas</label>
                                 
                                 <input type="radio" name="comida_salada" value="otros" id="salada_otros" onchange="toggleOtrosSalada()">
@@ -474,19 +474,19 @@
                         <div class="pregunta-fila">
                             <label>¿Qué clima prefieres?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="clima" value="calido" id="clima_calido">
+                                <input type="radio" name="clima" value="calido" id="clima_calido" onchange="toggleOtroClima()">
                                 <label for="clima_calido">Cálido</label>
                                 
-                                <input type="radio" name="clima" value="frio" id="clima_frio">
+                                <input type="radio" name="clima" value="frio" id="clima_frio" onchange="toggleOtroClima()">
                                 <label for="clima_frio">Frío</label>
                                 
-                                <input type="radio" name="clima" value="templado" id="clima_templado">
+                                <input type="radio" name="clima" value="templado" id="clima_templado" onchange="toggleOtroClima()">
                                 <label for="clima_templado">Templado</label>
                                 
-                                <input type="radio" name="clima" value="humedo" id="clima_humedo">
+                                <input type="radio" name="clima" value="humedo" id="clima_humedo" onchange="toggleOtroClima()">
                                 <label for="clima_humedo">Húmedo</label>
                                 
-                                <input type="radio" name="clima" value="seco" id="clima_seco">
+                                <input type="radio" name="clima" value="seco" id="clima_seco" onchange="toggleOtroClima()">
                                 <label for="clima_seco">Seco</label>
                                 
                                 <input type="radio" name="clima" value="otro" id="clima_otro" onchange="toggleOtroClima()">
@@ -630,19 +630,19 @@
                         <div class="pregunta-fila">
                             <label>¿Con qué frecuencia tomas el sol?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="tomar_sol" value="diario" id="sol_diario">
+                                <input type="radio" name="tomar_sol" value="diario" id="sol_diario" onchange="manejarSol()">
                                 <label for="sol_diario">Diario</label>
                                 
-                                <input type="radio" name="tomar_sol" value="semanal" id="sol_semanal">
+                                <input type="radio" name="tomar_sol" value="semanal" id="sol_semanal" onchange="manejarSol()">
                                 <label for="sol_semanal">Semanalmente</label>
                                 
-                                <input type="radio" name="tomar_sol" value="mensual" id="sol_mensual">
+                                <input type="radio" name="tomar_sol" value="mensual" id="sol_mensual" onchange="manejarSol()">
                                 <label for="sol_mensual">Mensualmente</label>
                                 
-                                <input type="radio" name="tomar_sol" value="nunca" id="sol_nunca">
+                                <input type="radio" name="tomar_sol" value="nunca" id="sol_nunca" onchange="manejarSol()">
                                 <label for="sol_nunca">Nunca</label>
                                 
-                                <input type="radio" name="tomar_sol" value="otro" id="sol_otro" onchange="toggleOtroSol()">
+                                <input type="radio" name="tomar_sol" value="otro" id="sol_otro" onchange="manejarSol()">
                                 <label for="sol_otro">Otro</label>
                                 
                                 <div id="otro-sol-container" style="display: none; margin-top: 10px;">
@@ -687,19 +687,19 @@
                         <div class="pregunta-fila">
                             <label>¿Cuál es tu patrón de sueño?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="patron_sueno" value="temprano_temprano" id="sueno_temprano">
+                                <input type="radio" name="patron_sueno" value="temprano_temprano" id="sueno_temprano" onchange="manejarSueno()">
                                 <label for="sueno_temprano">Me duermo temprano y despierto temprano</label>
                                 
-                                <input type="radio" name="patron_sueno" value="tarde_tarde" id="sueno_tarde">
+                                <input type="radio" name="patron_sueno" value="tarde_tarde" id="sueno_tarde" onchange="manejarSueno()">
                                 <label for="sueno_tarde">Me duermo tarde y despierto tarde</label>
                                 
-                                <input type="radio" name="patron_sueno" value="temprano_tarde" id="sueno_mixto1">
+                                <input type="radio" name="patron_sueno" value="temprano_tarde" id="sueno_mixto1" onchange="manejarSueno()">
                                 <label for="sueno_mixto1">Me duermo temprano pero despierto tarde</label>
                                 
-                                <input type="radio" name="patron_sueno" value="irregular" id="sueno_irregular">
+                                <input type="radio" name="patron_sueno" value="irregular" id="sueno_irregular" onchange="manejarSueno()">
                                 <label for="sueno_irregular">Horario irregular</label>
                                 
-                                <input type="radio" name="patron_sueno" value="otro" id="sueno_otro" onchange="toggleOtroSueno()">
+                                <input type="radio" name="patron_sueno" value="otro" id="sueno_otro" onchange="manejarSueno()">
                                 <label for="sueno_otro">Otro</label>
                                 
                                 <div id="otro-sueno-container" style="display: none; margin-top: 10px;">

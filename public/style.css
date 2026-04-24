@@ -1281,3 +1281,17 @@ input, textarea, select {
         margin-bottom: 5px;
     }
 }
+
+select {
+    color: #333 !important;
+    background-color: white !important;
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    font-size: 14px !important;
+}
+
+select option {
+    color: #333 !important;
+    background-color: white !important;
+}
+

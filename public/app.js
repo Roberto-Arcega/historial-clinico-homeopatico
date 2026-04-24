@@ -2042,11 +2042,71 @@ function toggleOtroSueno() {
     }
 }
 
-// FUNCIÓN DE PRUEBA
 function testToggle() {
-    console.log("Toggle funcionando!");
-    const container = document.getElementById('otros-dulce-container');
-    if (container) {
-        container.style.display = container.style.display === 'none' ? 'block' : 'none';
+    const otrosRadio = document.getElementById('dulce_otros');
+    const otrosContainer = document.getElementById('otros-dulce-container');
+    const otrosTexto = document.getElementById('otros_dulce_texto');
+    
+    if (otrosRadio.checked) {
+        otrosContainer.style.display = 'block';
+    } else {
+        otrosContainer.style.display = 'none';
+        otrosTexto.value = '';
+    }
+}
+
+// 1. Función para comida dulce (ya existe, solo cambiar conexión)
+function manejarComidaDulce() {
+    const otrosRadio = document.getElementById('dulce_otros');
+    const otrosContainer = document.getElementById('otros-dulce-container');
+    const otrosTexto = document.getElementById('otros_dulce_texto');
+    
+    if (otrosRadio.checked) {
+        otrosContainer.style.display = 'block';
+    } else {
+        otrosContainer.style.display = 'none';
+        otrosTexto.value = '';
+    }
+}
+
+// 2. Función para clima
+function manejarClima() {
+    const otroRadio = document.getElementById('clima_otro');
+    const otroContainer = document.getElementById('otro-clima-container');
+    const otroTexto = document.getElementById('otro_clima_texto');
+    
+    if (otroRadio.checked) {
+        otroContainer.style.display = 'block';
+    } else {
+        otroContainer.style.display = 'none';
+        otroTexto.value = '';
+    }
+}
+
+// 3. Función para tomar el sol
+function manejarSol() {
+    const otroRadio = document.getElementById('sol_otro');
+    const otroContainer = document.getElementById('otro-sol-container');
+    const otroTexto = document.getElementById('otro_sol_texto');
+    
+    if (otroRadio.checked) {
+        otroContainer.style.display = 'block';
+    } else {
+        otroContainer.style.display = 'none';
+        otroTexto.value = '';
+    }
+}
+
+// 4. Función para patrón de sueño
+function manejarSueno() {
+    const otroRadio = document.getElementById('sueno_otro');
+    const otroContainer = document.getElementById('otro-sueno-container');
+    const otroTexto = document.getElementById('otro_sueno_texto');
+    
+    if (otroRadio.checked) {
+        otroContainer.style.display = 'block';
+    } else {
+        otroContainer.style.display = 'none';
+        otroTexto.value = '';
     }
 }
