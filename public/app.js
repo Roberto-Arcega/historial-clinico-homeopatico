@@ -1769,7 +1769,7 @@ function toggleDatosConyuge() {
         switch(estadoCivil) {
             case 'Casado':
                 datosConyuge.style.display = 'block';
-                datosCasado.style.display = 'block';
+                datosCasado .style.display = 'block';
                 datosExConyuge.style.display = 'none';
                 datosViudo.style.display = 'none';
                 

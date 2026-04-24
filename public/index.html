@@ -359,100 +359,357 @@
                         </div>
                     </div>
                 </section>
-                <!-- SECCIÓN 3: HISTORIAL MÉDICO -->
-                <section class="seccion collapsed">
-                    <div class="seccion-header" onclick="toggleSeccion(this)">
-                        <h2>Historial Médico</h2>
-                        <div class="seccion-controles">
-                            <button type="button" onclick="limpiarSeccionRapida(2)" class="btn-limpiar" title="Limpiar esta sección">🗑️</button>
-                            <span class="seccion-toggle">▼</span>
+
+                
+                <!-- SECCIÓN 3: HÁBITOS Y ESTILO DE VIDA -->
+                <section class="section collapsed">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2>3. HÁBITOS Y ESTILO DE VIDA</h2>
+                        <div class="section-controls">
+                            <button type="button" onclick="clearSection(3)">
+                                <span class="clear-icon">🗑️</span>
+                            </button>
+                            <span class="section-toggle">▼</span>
                         </div>
                     </div>
-                    <div class="seccion-content">
-                        <!-- CIRUGÍAS Y MEDICAMENTOS -->
-                        <div class="campo-doble">
-                            <div class="campo-mitad">
-                                <label>¿Ha tenido cirugías?</label>
-                                <div class="radio-group-inline">
-                                    <label><input type="radio" name="tieneCirugias" value="No" onchange="toggleCirugias()" required> No</label>
-                                    <label><input type="radio" name="tieneCirugias" value="Si" onchange="toggleCirugias()" required> Sí</label>
-                                </div>
-                            </div>
-                            <div class="campo-mitad">
-                                <label>¿Toma medicamentos actualmente?</label>
-                                <div class="radio-group-inline">
-                                    <label><input type="radio" name="tomaMedicamentos" value="No" onchange="toggleMedicamentos()" required> No</label>
-                                    <label><input type="radio" name="tomaMedicamentos" value="Si" onchange="toggleMedicamentos()" required> Sí</label>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <!-- DETALLES DE CIRUGÍAS (si las tiene) -->
-                        <div id="datosCirugias" style="display: none;">
-                            <div class="campo">
-                                <label for="detalleCirugias">Describa las cirugías y fechas aproximadas:</label>
-                                <textarea id="detalleCirugias" name="detalleCirugias" placeholder="Ej: Apendicetomía 2015, Cesárea 2020, etc."></textarea>
-                            </div>
-                        </div>
-                    
-                        <!-- LISTA DE MEDICAMENTOS (si toma) -->
-                        <div id="datosMedicamentos" style="display: none;">
-                            <div class="campo">
-                                <label for="listaMedicamentos">Liste los medicamentos que toma:</label>
-                                <textarea id="listaMedicamentos" name="listaMedicamentos" placeholder="Ej: Metformina 500mg c/12hrs, Losartán 50mg c/24hrs, etc."></textarea>
-                            </div>
-                        </div>
-                    
-                        <!-- ALERGIAS Y HOSPITALIZACIONES -->
-                        <div class="campo-doble">
-                            <div class="campo-mitad">
-                                <label>¿Tiene alergias conocidas?</label>
-                                <div class="radio-group-inline">
-                                    <label><input type="radio" name="tieneAlergias" value="No" onchange="toggleAlergias()" required> No</label>
-                                    <label><input type="radio" name="tieneAlergias" value="Si" onchange="toggleAlergias()" required> Sí</label>
-                                </div>
-                            </div>
-                            <div class="campo-mitad">
-                                <label>¿Ha estado hospitalizado?</label>
-                                <div class="radio-group-inline">
-                                    <label><input type="radio" name="hospitalizaciones" value="No" onchange="toggleHospitalizaciones()" required> No</label>
-                                    <label><input type="radio" name="hospitalizaciones" value="Si" onchange="toggleHospitalizaciones()" required> Sí</label>
+                    <div class="section-content">
+                        
+                        <!-- 1. Comida Dulce Preferida -->
+                        <div class="pregunta-fila">
+                            <label>¿Cuál es tu comida dulce preferida?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="comida_dulce" value="helado" id="dulce_helado">
+                                <label for="dulce_helado">Helado</label>
+                                
+                                <input type="radio" name="comida_dulce" value="chocolate" id="dulce_chocolate">
+                                <label for="dulce_chocolate">Chocolate</label>
+                                
+                                <input type="radio" name="comida_dulce" value="pan" id="dulce_pan">
+                                <label for="dulce_pan">Pan/Postres</label>
+                                
+                                <input type="radio" name="comida_dulce" value="otros" id="dulce_otros" onchange="toggleOtrosDulce()">
+                                <label for="dulce_otros">Otros</label>
+                                
+                                <div id="otros-dulce-container" style="display: none; margin-top: 10px;">
+                                    <input type="text" id="otros_dulce_texto" placeholder="Especifica tu comida dulce preferida">
                                 </div>
                             </div>
                         </div>
-                    
-                        <!-- DETALLES DE ALERGIAS (si las tiene) -->
-                        <div id="datosAlergias" style="display: none;">
-                            <div class="campo">
-                                <label for="listaAlergias">Describa las alergias:</label>
-                                <textarea id="listaAlergias" name="listaAlergias" placeholder="Ej: Penicilina, polen, mariscos, etc."></textarea>
+
+                        <!-- 2. Comida Salada Preferida -->
+                        <div class="pregunta-fila">
+                            <label>¿Cuál es tu comida salada preferida?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="comida_salada" value="pollo" id="salada_pollo">
+                                <label for="salada_pollo">Pollo</label>
+                                
+                                <input type="radio" name="comida_salada" value="pescado" id="salada_pescado">
+                                <label for="salada_pescado">Pescado</label>
+                                
+                                <input type="radio" name="comida_salada" value="carne" id="salada_carne">
+                                <label for="salada_carne">Carne</label>
+                                
+                                <input type="radio" name="comida_salada" value="caldos" id="salada_caldos">
+                                <label for="salada_caldos">Caldos/Sopas</label>
+                                
+                                <input type="radio" name="comida_salada" value="otros" id="salada_otros" onchange="toggleOtrosSalada()">
+                                <label for="salada_otros">Otros</label>
+                                
+                                <div id="otros-salada-container" style="display: none; margin-top: 10px;">
+                                    <input type="text" id="otros_salada_texto" placeholder="Especifica tu comida salada preferida">
+                                </div>
                             </div>
                         </div>
-                    
-                        <!-- DETALLES DE HOSPITALIZACIONES (si las ha tenido) -->
-                        <div id="datosHospitalizaciones" style="display: none;">
-                            <div class="campo">
-                                <label for="detalleHospitalizaciones">Describa hospitalizaciones y fechas:</label>
-                                <textarea id="detalleHospitalizaciones" name="detalleHospitalizaciones" placeholder="Ej: Neumonía 2018 (5 días), COVID-19 2021 (10 días), etc."></textarea>
+
+                        <!-- 3. Litros de Agua -->
+                        <div class="pregunta-fila">
+                            <label>¿Cuántos litros de agua tomas al día?</label>
+                            <div class="respuesta-container">
+                                <select name="litros_agua" id="litros_agua">
+                                    <option value="">Selecciona...</option>
+                                    <option value="1">1 litro</option>
+                                    <option value="2">2 litros</option>
+                                    <option value="3">3 litros</option>
+                                    <option value="4">4 litros</option>
+                                    <option value="5">5 litros</option>
+                                    <option value="5+">Más de 5 litros</option>
+                                </select>
                             </div>
                         </div>
-                    
-                        <!-- ENFERMEDADES CRÓNICAS -->
-                        <div class="campo">
-                            <label>¿Padece alguna enfermedad crónica degenerativa?</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="enfermedadesCronicas" value="No" onchange="toggleCronicas()" required> No</label>
-                                <label><input type="radio" name="enfermedadesCronicas" value="Si" onchange="toggleCronicas()" required> Sí</label>
+
+                        <!-- 4. Sal Extra -->
+                        <div class="pregunta-fila">
+                            <label>¿Le agregas sal extra a tus alimentos?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="sal_extra" value="si" id="sal_si">
+                                <label for="sal_si">Sí</label>
+                                
+                                <input type="radio" name="sal_extra" value="no" id="sal_no">
+                                <label for="sal_no">No</label>
                             </div>
                         </div>
-                    
-                        <!-- LISTA DE ENFERMEDADES CRÓNICAS (si las tiene) -->
-                        <div id="datosCronicas" style="display: none;">
-                            <div class="campo">
-                                <label for="listaCronicas">Enumere las enfermedades crónicas:</label>
-                                <textarea id="listaCronicas" name="listaCronicas" placeholder="Ej: Diabetes tipo 2, Hipertensión arterial, Artritis, etc."></textarea>
+
+                        <!-- 5. Ejercicio -->
+                        <div class="pregunta-fila">
+                            <label>¿Realizas ejercicio regularmente?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="ejercicio" value="si" id="ejercicio_si" onchange="toggleEjercicio()">
+                                <label for="ejercicio_si">Sí</label>
+                                
+                                <input type="radio" name="ejercicio" value="no" id="ejercicio_no" onchange="toggleEjercicio()">
+                                <label for="ejercicio_no">No</label>
+                                
+                                <div id="ejercicio-frecuencia-container" style="display: none; margin-top: 10px;">
+                                    <label>¿Con qué frecuencia?</label>
+                                    <select name="ejercicio_frecuencia" id="ejercicio_frecuencia">
+                                        <option value="">Selecciona...</option>
+                                        <option value="diario">Diario</option>
+                                        <option value="3-4_semana">3-4 veces por semana</option>
+                                        <option value="1-2_semana">1-2 veces por semana</option>
+                                        <option value="ocasional">Ocasionalmente</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- 6. Clima Preferido -->
+                        <div class="pregunta-fila">
+                            <label>¿Qué clima prefieres?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="clima" value="calido" id="clima_calido">
+                                <label for="clima_calido">Cálido</label>
+                                
+                                <input type="radio" name="clima" value="frio" id="clima_frio">
+                                <label for="clima_frio">Frío</label>
+                                
+                                <input type="radio" name="clima" value="templado" id="clima_templado">
+                                <label for="clima_templado">Templado</label>
+                                
+                                <input type="radio" name="clima" value="humedo" id="clima_humedo">
+                                <label for="clima_humedo">Húmedo</label>
+                                
+                                <input type="radio" name="clima" value="seco" id="clima_seco">
+                                <label for="clima_seco">Seco</label>
+                                
+                                <input type="radio" name="clima" value="otro" id="clima_otro" onchange="toggleOtroClima()">
+                                <label for="clima_otro">Otro</label>
+                                
+                                <div id="otro-clima-container" style="display: none; margin-top: 10px;">
+                                    <input type="text" id="otro_clima_texto" placeholder="Especifica el clima que prefieres">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 7. Problemas Intestino (COMPLEJO) -->
+                        <div class="pregunta-fila">
+                            <label>¿Tienes problemas intestinales?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="problemas_intestino" value="si" id="intestino_si" onchange="toggleProblemasIntestino()">
+                                <label for="intestino_si">Sí</label>
+                                
+                                <input type="radio" name="problemas_intestino" value="no" id="intestino_no" onchange="toggleProblemasIntestino()">
+                                <label for="intestino_no">No</label>
+                                
+                                <div id="problemas-intestino-detalle" style="display: none; margin-top: 15px;">
+                                    <!-- Inflamación -->
+                                    <div class="sub-pregunta">
+                                        <label>¿Inflamación intestinal?</label>
+                                        <input type="radio" name="inflamacion" value="si" id="inflamacion_si" onchange="toggleInflamacion()">
+                                        <label for="inflamacion_si">Sí</label>
+                                        
+                                        <input type="radio" name="inflamacion" value="no" id="inflamacion_no" onchange="toggleInflamacion()">
+                                        <label for="inflamacion_no">No</label>
+                                        
+                                        <div id="inflamacion-horario" style="display: none; margin-top: 10px;">
+                                            <input type="text" id="inflamacion_horario_texto" placeholder="¿En qué horario es más frecuente?">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Gases -->
+                                    <div class="sub-pregunta">
+                                        <label>¿Gases intestinales?</label>
+                                        <input type="radio" name="gases" value="si" id="gases_si" onchange="toggleGases()">
+                                        <label for="gases_si">Sí</label>
+                                        
+                                        <input type="radio" name="gases" value="no" id="gases_no" onchange="toggleGases()">
+                                        <label for="gases_no">No</label>
+                                        
+                                        <div id="gases-horario" style="display: none; margin-top: 10px;">
+                                            <input type="text" id="gases_horario_texto" placeholder="¿En qué horario es más frecuente?">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8. Estreñimiento/Diarrea -->
+                        <div class="pregunta-fila">
+                            <label>¿Sufres de estreñimiento o diarrea?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="estrenimiento_diarrea" value="estrenimiento" id="estrenimiento" onchange="toggleFrecuenciaIntestinal()">
+                                <label for="estrenimiento">Estreñimiento</label>
+                                
+                                <input type="radio" name="estrenimiento_diarrea" value="diarrea" id="diarrea" onchange="toggleFrecuenciaIntestinal()">
+                                <label for="diarrea">Diarrea</label>
+                                
+                                <input type="radio" name="estrenimiento_diarrea" value="ambos" id="ambos" onchange="toggleFrecuenciaIntestinal()">
+                                <label for="ambos">Ambos</label>
+                                
+                                <input type="radio" name="estrenimiento_diarrea" value="ninguno" id="ninguno" onchange="toggleFrecuenciaIntestinal()">
+                                <label for="ninguno">Ninguno</label>
+                                
+                                <div id="frecuencia-intestinal-container" style="display: none; margin-top: 10px;">
+                                    <label>¿Con qué frecuencia?</label>
+                                    <select name="frecuencia_intestinal" id="frecuencia_intestinal">
+                                        <option value="">Selecciona...</option>
+                                        <option value="diario">Diario</option>
+                                        <option value="semanal">Semanal</option>
+                                        <option value="mensual">Mensual</option>
+                                        <option value="ocasional">Ocasional</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9. Hemorroides -->
+                        <div class="pregunta-fila">
+                            <label>¿Padeces hemorroides?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="hemorroides" value="si" id="hemorroides_si">
+                                <label for="hemorroides_si">Sí</label>
+                                
+                                <input type="radio" name="hemorroides" value="no" id="hemorroides_no">
+                                <label for="hemorroides_no">No</label>
+                            </div>
+                        </div>
+
+                        <!-- 10. Vida Sexual -->
+                        <div class="pregunta-fila">
+                            <label>¿Tienes vida sexual activa?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="vida_sexual" value="si" id="sexual_si" onchange="toggleVidaSexual()">
+                                <label for="sexual_si">Sí</label>
+                                
+                                <input type="radio" name="vida_sexual" value="no" id="sexual_no" onchange="toggleVidaSexual()">
+                                <label for="sexual_no">No</label>
+                                
+                                <div id="frecuencia-sexual-container" style="display: none; margin-top: 10px;">
+                                    <label>¿Con qué frecuencia?</label>
+                                    <select name="frecuencia_sexual" id="frecuencia_sexual">
+                                        <option value="">Selecciona...</option>
+                                        <option value="diaria">Diaria</option>
+                                        <option value="semanal">Semanal</option>
+                                        <option value="quincenal">Quincenal</option>
+                                        <option value="mensual">Mensual</option>
+                                        <option value="ocasional">Ocasional</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 11. Transpiración -->
+                        <div class="pregunta-fila">
+                            <label>¿Tienes transpiración constante?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="transpiracion" value="si" id="transpiracion_si" onchange="toggleTranspiracion()">
+                                <label for="transpiracion_si">Sí</label>
+                                
+                                <input type="radio" name="transpiracion" value="no" id="transpiracion_no" onchange="toggleTranspiracion()">
+                                <label for="transpiracion_no">No</label>
+                                
+                                <div id="olor-fuerte-container" style="display: none; margin-top: 10px;">
+                                    <label>¿Con olor fuerte?</label>
+                                    <input type="radio" name="olor_fuerte" value="si" id="olor_si">
+                                    <label for="olor_si">Sí</label>
+                                    
+                                    <input type="radio" name="olor_fuerte" value="no" id="olor_no">
+                                    <label for="olor_no">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 12. Tomar el Sol -->
+                        <div class="pregunta-fila">
+                            <label>¿Con qué frecuencia tomas el sol?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="tomar_sol" value="diario" id="sol_diario">
+                                <label for="sol_diario">Diario</label>
+                                
+                                <input type="radio" name="tomar_sol" value="semanal" id="sol_semanal">
+                                <label for="sol_semanal">Semanalmente</label>
+                                
+                                <input type="radio" name="tomar_sol" value="mensual" id="sol_mensual">
+                                <label for="sol_mensual">Mensualmente</label>
+                                
+                                <input type="radio" name="tomar_sol" value="nunca" id="sol_nunca">
+                                <label for="sol_nunca">Nunca</label>
+                                
+                                <input type="radio" name="tomar_sol" value="otro" id="sol_otro" onchange="toggleOtroSol()">
+                                <label for="sol_otro">Otro</label>
+                                
+                                <div id="otro-sol-container" style="display: none; margin-top: 10px;">
+                                    <input type="text" id="otro_sol_texto" placeholder="Especifica la frecuencia">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 13. Cólicos Menstruales (Solo Mujeres) -->
+                        <div class="pregunta-fila" id="colicos-container">
+                            <label>¿Sufres de cólicos menstruales? (Solo mujeres)</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="colicos" value="si" id="colicos_si" onchange="toggleColicos()">
+                                <label for="colicos_si">Sí</label>
+                                
+                                <input type="radio" name="colicos" value="no" id="colicos_no" onchange="toggleColicos()">
+                                <label for="colicos_no">No</label>
+                                
+                                <input type="radio" name="colicos" value="no_aplica" id="colicos_na" onchange="toggleColicos()">
+                                <label for="colicos_na">No aplica (Hombre)</label>
+                                
+                                <div id="nivel-dolor-container" style="display: none; margin-top: 10px;">
+                                    <label>Nivel de dolor (1-10):</label>
+                                    <select name="nivel_dolor" id="nivel_dolor">
+                                        <option value="">Selecciona...</option>
+                                        <option value="1">1 - Muy leve</option>
+                                        <option value="2">2 - Leve</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 - Moderado</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8 - Severo</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10 - Extremo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 14. Patrón de Sueño -->
+                        <div class="pregunta-fila">
+                            <label>¿Cuál es tu patrón de sueño?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="patron_sueno" value="temprano_temprano" id="sueno_temprano">
+                                <label for="sueno_temprano">Me duermo temprano y despierto temprano</label>
+                                
+                                <input type="radio" name="patron_sueno" value="tarde_tarde" id="sueno_tarde">
+                                <label for="sueno_tarde">Me duermo tarde y despierto tarde</label>
+                                
+                                <input type="radio" name="patron_sueno" value="temprano_tarde" id="sueno_mixto1">
+                                <label for="sueno_mixto1">Me duermo temprano pero despierto tarde</label>
+                                
+                                <input type="radio" name="patron_sueno" value="irregular" id="sueno_irregular">
+                                <label for="sueno_irregular">Horario irregular</label>
+                                
+                                <input type="radio" name="patron_sueno" value="otro" id="sueno_otro" onchange="toggleOtroSueno()">
+                                <label for="sueno_otro">Otro</label>
+                                
+                                <div id="otro-sueno-container" style="display: none; margin-top: 10px;">
+                                    <input type="text" id="otro_sueno_texto" placeholder="Describe tu patrón de sueño">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </section>
 
