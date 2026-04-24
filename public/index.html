@@ -213,7 +213,7 @@
                             </div>
                         </div>
                 </section>
-                <!-- REEMPLAZAR la sección familiar con estas mejoras -->
+                <!-- SECCION 2 REEMPLAZAR la sección familiar con estas mejoras -->
                 <section class="seccion collapsed">
                     <div class="seccion-header" onclick="toggleSeccion(this)">
                         <h2>Información Familiar</h2>
@@ -360,19 +360,17 @@
                     </div>
                 </section>
 
-                
+
                 <!-- SECCIÓN 3: HÁBITOS Y ESTILO DE VIDA -->
-                <section class="section collapsed">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h2>3. HÁBITOS Y ESTILO DE VIDA</h2>
-                        <div class="section-controls">
-                            <button type="button" onclick="clearSection(3)">
-                                <span class="clear-icon">🗑️</span>
-                            </button>
-                            <span class="section-toggle">▼</span>
+                <section class="seccion collapsed">
+                    <div class="seccion-header" onclick="toggleSeccion(this)">
+                        <h2>HÁBITOS Y ESTILO DE VIDA</h2>
+                        <div class="seccion-controles">
+                            <button type="button" onclick="limpiarSeccionRapida(2)" class="btn-limpiar" title="Limpiar esta sección">🗑️</button>
+                            <span class="seccion-toggle">▼</span>
                         </div>
                     </div>
-                    <div class="section-content">
+                    <div class="seccion-content">
                         
                         <!-- 1. Comida Dulce Preferida -->
                         <div class="pregunta-fila">
@@ -387,7 +385,7 @@
                                 <input type="radio" name="comida_dulce" value="pan" id="dulce_pan">
                                 <label for="dulce_pan">Pan/Postres</label>
                                 
-                                <input type="radio" name="comida_dulce" value="otros" id="dulce_otros" onchange="toggleOtrosDulce()">
+                                <input type="radio" name="comida_dulce" value="otros" id="dulce_otros" onchange="testToggle()">
                                 <label for="dulce_otros">Otros</label>
                                 
                                 <div id="otros-dulce-container" style="display: none; margin-top: 10px;">
@@ -721,7 +719,6 @@
                             <button type="button" onclick="limpiarSeccionRapida(3)" class="btn-limpiar" title="Limpiar esta sección">🗑️</button>
                             <span class="seccion-toggle">▼</span>
                         </div>
-                    </div>
                     <div class="seccion-content">
                         <!-- MOTIVO DE CONSULTA -->
                         <div class="campo">

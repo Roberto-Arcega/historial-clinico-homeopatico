@@ -1157,3 +1157,127 @@ input, textarea, select {
     color: #999;
     font-style: italic;
 }
+
+/* ESTILOS PARA SECCIÓN 3 - CAMPOS CONDICIONALES */
+
+.pregunta-fila {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid #4a90e2;
+}
+
+.pregunta-fila label:first-child {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.respuesta-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.respuesta-container input[type="radio"] {
+    margin-right: 5px;
+}
+
+.respuesta-container label {
+    margin-right: 15px;
+    cursor: pointer;
+    color: #b0b0b0;
+}
+
+/* Containers condicionales */
+#otros-dulce-container,
+#otros-salada-container,
+#ejercicio-frecuencia-container,
+#otro-clima-container,
+#problemas-intestino-detalle,
+#inflamacion-horario,
+#gases-horario,
+#frecuencia-intestinal-container,
+#frecuencia-sexual-container,
+#olor-fuerte-container,
+#otro-sol-container,
+#nivel-dolor-container,
+#otro-sueno-container {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Sub-preguntas dentro de problemas intestinales */
+.sub-pregunta {
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 5px;
+}
+
+.sub-pregunta label:first-child {
+    font-weight: normal;
+    margin-bottom: 8px;
+    color: #c0c0c0;
+}
+
+/* Inputs de texto condicionales */
+#otros_dulce_texto,
+#otros_salada_texto,
+#otro_clima_texto,
+#inflamacion_horario_texto,
+#gases_horario_texto,
+#otro_sol_texto,
+#otro_sueno_texto {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+/* Selects condicionales */
+#ejercicio_frecuencia,
+#frecuencia_intestinal,
+#frecuencia_sexual,
+#nivel_dolor {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+/* Select principal de agua */
+#litros_agua {
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+    min-width: 150px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .respuesta-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .respuesta-container label {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+}

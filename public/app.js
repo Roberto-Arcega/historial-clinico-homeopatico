@@ -1861,184 +1861,143 @@ function toggleDatosHermano(numero) {
     }
 }
 
-// SECCIÓN 3 - FUNCIONES PARA LÓGICAS CONDICIONALES
+// SECCIÓN 3 - FUNCIONES CORREGIDAS PARA TU HTML EXACTO
 
 // 1. Comida dulce - campo "otros"
 function toggleOtrosDulce() {
-    const dulceSelect = document.getElementById('comida_dulce');
-    const otrosDiv = document.getElementById('otros_dulce_div');
+    const dulceOtros = document.getElementById('dulce_otros');
+    const otrosContainer = document.getElementById('otros-dulce-container');
     
-    if (dulceSelect.value === 'otros') {
-        otrosDiv.style.display = 'block';
+    if (dulceOtros.checked) {
+        otrosContainer.style.display = 'block';
     } else {
-        otrosDiv.style.display = 'none';
-        document.getElementById('otros_dulce').value = '';
+        otrosContainer.style.display = 'none';
+        document.getElementById('otros_dulce_texto').value = '';
     }
 }
 
 // 2. Comida salada - campo "otros"
 function toggleOtrosSalada() {
-    const saladaSelect = document.getElementById('comida_salada');
-    const otrosDiv = document.getElementById('otros_salada_div');
+    const saladaOtros = document.getElementById('salada_otros');
+    const otrosContainer = document.getElementById('otros-salada-container');
     
-    if (saladaSelect.value === 'otros') {
-        otrosDiv.style.display = 'block';
+    if (saladaOtros.checked) {
+        otrosContainer.style.display = 'block';
     } else {
-        otrosDiv.style.display = 'none';
-        document.getElementById('otros_salada').value = '';
+        otrosContainer.style.display = 'none';
+        document.getElementById('otros_salada_texto').value = '';
     }
 }
 
 // 3. Ejercicio - frecuencia
 function toggleEjercicio() {
-    const ejercicioRadios = document.getElementsByName('ejercicio');
-    const frecuenciaDiv = document.getElementById('frecuencia_ejercicio_div');
-    let ejercicioSi = false;
+    const ejercicioSi = document.getElementById('ejercicio_si');
+    const frecuenciaContainer = document.getElementById('ejercicio-frecuencia-container');
     
-    for (let radio of ejercicioRadios) {
-        if (radio.checked && radio.value === 'si') {
-            ejercicioSi = true;
-            break;
-        }
-    }
-    
-    if (ejercicioSi) {
-        frecuenciaDiv.style.display = 'block';
+    if (ejercicioSi.checked) {
+        frecuenciaContainer.style.display = 'block';
     } else {
-        frecuenciaDiv.style.display = 'none';
-        document.getElementById('frecuencia_ejercicio').value = '';
+        frecuenciaContainer.style.display = 'none';
+        document.getElementById('ejercicio_frecuencia').value = '';
     }
 }
 
 // 4. Clima - campo "otro"
 function toggleOtroClima() {
-    const climaSelect = document.getElementById('clima');
-    const otroDiv = document.getElementById('otro_clima_div');
+    const climaOtro = document.getElementById('clima_otro');
+    const otroContainer = document.getElementById('otro-clima-container');
     
-    if (climaSelect.value === 'otro') {
-        otroDiv.style.display = 'block';
+    if (climaOtro.checked) {
+        otroContainer.style.display = 'block';
     } else {
-        otroDiv.style.display = 'none';
-        document.getElementById('otro_clima').value = '';
+        otroContainer.style.display = 'none';
+        document.getElementById('otro_clima_texto').value = '';
     }
 }
 
 // 5. Problemas intestinales - sub-preguntas
 function toggleProblemasIntestino() {
-    const intestinoRadios = document.getElementsByName('problemas_intestino');
-    const subPreguntasDiv = document.getElementById('sub_preguntas_intestino');
-    let intestinoSi = false;
+    const intestinoSi = document.getElementById('intestino_si');
+    const detalleContainer = document.getElementById('problemas-intestino-detalle');
     
-    for (let radio of intestinoRadios) {
-        if (radio.checked && radio.value === 'si') {
-            intestinoSi = true;
-            break;
-        }
-    }
-    
-    if (intestinoSi) {
-        subPreguntasDiv.style.display = 'block';
+    if (intestinoSi.checked) {
+        detalleContainer.style.display = 'block';
     } else {
-        subPreguntasDiv.style.display = 'none';
+        detalleContainer.style.display = 'none';
         // Limpiar sub-preguntas
-        const checkboxes = subPreguntasDiv.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(cb => cb.checked = false);
+        const radios = detalleContainer.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => radio.checked = false);
+        const texts = detalleContainer.querySelectorAll('input[type="text"]');
+        texts.forEach(text => text.value = '');
+        // Ocultar sub-containers
+        document.getElementById('inflamacion-horario').style.display = 'none';
+        document.getElementById('gases-horario').style.display = 'none';
     }
 }
 
 // 6. Inflamación - horario
 function toggleInflamacion() {
-    const inflamacionRadios = document.getElementsByName('inflamacion');
-    const horarioDiv = document.getElementById('horario_inflamacion_div');
-    let inflamacionSi = false;
+    const inflamacionSi = document.getElementById('inflamacion_si');
+    const horarioContainer = document.getElementById('inflamacion-horario');
     
-    for (let radio of inflamacionRadios) {
-        if (radio.checked && radio.value === 'si') {
-            inflamacionSi = true;
-            break;
-        }
-    }
-    
-    if (inflamacionSi) {
-        horarioDiv.style.display = 'block';
+    if (inflamacionSi.checked) {
+        horarioContainer.style.display = 'block';
     } else {
-        horarioDiv.style.display = 'none';
-        document.getElementById('horario_inflamacion').value = '';
+        horarioContainer.style.display = 'none';
+        document.getElementById('inflamacion_horario_texto').value = '';
     }
 }
 
 // 7. Gases - horario
 function toggleGases() {
-    const gasesRadios = document.getElementsByName('gases');
-    const horarioDiv = document.getElementById('horario_gases_div');
-    let gasesSi = false;
+    const gasesSi = document.getElementById('gases_si');
+    const horarioContainer = document.getElementById('gases-horario');
     
-    for (let radio of gasesRadios) {
-        if (radio.checked && radio.value === 'si') {
-            gasesSi = true;
-            break;
-        }
-    }
-    
-    if (gasesSi) {
-        horarioDiv.style.display = 'block';
+    if (gasesSi.checked) {
+        horarioContainer.style.display = 'block';
     } else {
-        horarioDiv.style.display = 'none';
-        document.getElementById('horario_gases').value = '';
+        horarioContainer.style.display = 'none';
+        document.getElementById('gases_horario_texto').value = '';
     }
 }
 
 // 8. Frecuencia intestinal - frecuencia específica
 function toggleFrecuenciaIntestinal() {
-    const frecuenciaSelect = document.getElementById('frecuencia_intestinal');
-    const frecuenciaDiv = document.getElementById('frecuencia_especifica_div');
+    const estrenimiento = document.getElementById('estrenimiento');
+    const diarrea = document.getElementById('diarrea');
+    const ambos = document.getElementById('ambos');
+    const frecuenciaContainer = document.getElementById('frecuencia-intestinal-container');
     
-    if (frecuenciaSelect.value === 'estrenimiento' || frecuenciaSelect.value === 'diarrea') {
-        frecuenciaDiv.style.display = 'block';
+    if (estrenimiento.checked || diarrea.checked || ambos.checked) {
+        frecuenciaContainer.style.display = 'block';
     } else {
-        frecuenciaDiv.style.display = 'none';
-        document.getElementById('frecuencia_especifica').value = '';
+        frecuenciaContainer.style.display = 'none';
+        document.getElementById('frecuencia_intestinal').value = '';
     }
 }
 
 // 9. Vida sexual - frecuencia
 function toggleVidaSexual() {
-    const vidaSexualRadios = document.getElementsByName('vida_sexual');
-    const frecuenciaDiv = document.getElementById('frecuencia_sexual_div');
-    let vidaSexualSi = false;
+    const sexualSi = document.getElementById('sexual_si');
+    const frecuenciaContainer = document.getElementById('frecuencia-sexual-container');
     
-    for (let radio of vidaSexualRadios) {
-        if (radio.checked && radio.value === 'si') {
-            vidaSexualSi = true;
-            break;
-        }
-    }
-    
-    if (vidaSexualSi) {
-        frecuenciaDiv.style.display = 'block';
+    if (sexualSi.checked) {
+        frecuenciaContainer.style.display = 'block';
     } else {
-        frecuenciaDiv.style.display = 'none';
+        frecuenciaContainer.style.display = 'none';
         document.getElementById('frecuencia_sexual').value = '';
     }
 }
 
 // 10. Transpiración - olor fuerte
 function toggleTranspiracion() {
-    const transpiracionRadios = document.getElementsByName('transpiracion');
-    const olorDiv = document.getElementById('olor_fuerte_div');
-    let transpiracionSi = false;
+    const transpiracionSi = document.getElementById('transpiracion_si');
+    const olorContainer = document.getElementById('olor-fuerte-container');
     
-    for (let radio of transpiracionRadios) {
-        if (radio.checked && radio.value === 'si') {
-            transpiracionSi = true;
-            break;
-        }
-    }
-    
-    if (transpiracionSi) {
-        olorDiv.style.display = 'block';
+    if (transpiracionSi.checked) {
+        olorContainer.style.display = 'block';
     } else {
-        olorDiv.style.display = 'none';
+        olorContainer.style.display = 'none';
         const olorRadios = document.getElementsByName('olor_fuerte');
         olorRadios.forEach(radio => radio.checked = false);
     }
@@ -2046,47 +2005,48 @@ function toggleTranspiracion() {
 
 // 11. Tomar sol - campo "otro"
 function toggleOtroSol() {
-    const solSelect = document.getElementById('tomar_sol');
-    const otroDiv = document.getElementById('otro_sol_div');
+    const solOtro = document.getElementById('sol_otro');
+    const otroContainer = document.getElementById('otro-sol-container');
     
-    if (solSelect.value === 'otro') {
-        otroDiv.style.display = 'block';
+    if (solOtro.checked) {
+        otroContainer.style.display = 'block';
     } else {
-        otroDiv.style.display = 'none';
-        document.getElementById('otro_sol').value = '';
+        otroContainer.style.display = 'none';
+        document.getElementById('otro_sol_texto').value = '';
     }
 }
 
 // 12. Cólicos - nivel de dolor
 function toggleColicos() {
-    const colicosRadios = document.getElementsByName('colicos');
-    const nivelDiv = document.getElementById('nivel_dolor_div');
-    let colicosSi = false;
+    const colicosSi = document.getElementById('colicos_si');
+    const nivelContainer = document.getElementById('nivel-dolor-container');
     
-    for (let radio of colicosRadios) {
-        if (radio.checked && radio.value === 'si') {
-            colicosSi = true;
-            break;
-        }
-    }
-    
-    if (colicosSi) {
-        nivelDiv.style.display = 'block';
+    if (colicosSi.checked) {
+        nivelContainer.style.display = 'block';
     } else {
-        nivelDiv.style.display = 'none';
+        nivelContainer.style.display = 'none';
         document.getElementById('nivel_dolor').value = '';
     }
 }
 
 // 13. Patrón de sueño - campo "otro"
 function toggleOtroSueno() {
-    const suenoSelect = document.getElementById('patron_sueno');
-    const otroDiv = document.getElementById('otro_sueno_div');
+    const suenoOtro = document.getElementById('sueno_otro');
+    const otroContainer = document.getElementById('otro-sueno-container');
     
-    if (suenoSelect.value === 'otro') {
-        otroDiv.style.display = 'block';
+    if (suenoOtro.checked) {
+        otroContainer.style.display = 'block';
     } else {
-        otroDiv.style.display = 'none';
-        document.getElementById('otro_sueno').value = '';
+        otroContainer.style.display = 'none';
+        document.getElementById('otro_sueno_texto').value = '';
+    }
+}
+
+// FUNCIÓN DE PRUEBA
+function testToggle() {
+    console.log("Toggle funcionando!");
+    const container = document.getElementById('otros-dulce-container');
+    if (container) {
+        container.style.display = container.style.display === 'none' ? 'block' : 'none';
     }
 }
