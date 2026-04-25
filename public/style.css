@@ -1295,3 +1295,26 @@ select option {
     background-color: white !important;
 }
 
+/* Solución para radio buttons desalineados */
+.seccion-3 input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.seccion-3 label {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* Específico para patrón de sueño si tiene clase especial */
+.patron-sueno label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+

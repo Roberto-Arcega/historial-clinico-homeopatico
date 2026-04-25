@@ -687,27 +687,36 @@
                         <div class="pregunta-fila">
                             <label>¿Cuál es tu patrón de sueño?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="patron_sueno" value="temprano_temprano" id="sueno_temprano" onchange="manejarSueno()">
-                                <label for="sueno_temprano">Me duermo temprano y despierto temprano</label>
+                                <label for="sueno_temprano">
+                                    <input type="radio" name="patron_sueno" value="temprano_temprano" id="sueno_temprano" onchange="manejarSueno()">
+                                    Me duermo temprano y despierto temprano
+                                </label>
                                 
-                                <input type="radio" name="patron_sueno" value="tarde_tarde" id="sueno_tarde" onchange="manejarSueno()">
-                                <label for="sueno_tarde">Me duermo tarde y despierto tarde</label>
+                                <label for="sueno_tarde">
+                                    <input type="radio" name="patron_sueno" value="tarde_tarde" id="sueno_tarde" onchange="manejarSueno()">
+                                    Me duermo tarde y despierto tarde
+                                </label>
                                 
-                                <input type="radio" name="patron_sueno" value="temprano_tarde" id="sueno_mixto1" onchange="manejarSueno()">
-                                <label for="sueno_mixto1">Me duermo temprano pero despierto tarde</label>
+                                <label for="sueno_mixto1">
+                                    <input type="radio" name="patron_sueno" value="temprano_tarde" id="sueno_mixto1" onchange="manejarSueno()">
+                                    Me duermo temprano pero despierto tarde
+                                </label>
                                 
-                                <input type="radio" name="patron_sueno" value="irregular" id="sueno_irregular" onchange="manejarSueno()">
-                                <label for="sueno_irregular">Horario irregular</label>
+                                <label for="sueno_irregular">
+                                    <input type="radio" name="patron_sueno" value="irregular" id="sueno_irregular" onchange="manejarSueno()">
+                                    Horario irregular
+                                </label>
                                 
-                                <input type="radio" name="patron_sueno" value="otro" id="sueno_otro" onchange="manejarSueno()">
-                                <label for="sueno_otro">Otro</label>
+                                <label for="sueno_otro">
+                                    <input type="radio" name="patron_sueno" value="otro" id="sueno_otro" onchange="manejarSueno()">
+                                    Otro
+                                </label>
                                 
                                 <div id="otro-sueno-container" style="display: none; margin-top: 10px;">
                                     <input type="text" id="otro_sueno_texto" placeholder="Describe tu patrón de sueño">
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </section>
 
