@@ -1168,7 +1168,8 @@ input, textarea, select {
     border-left: 3px solid #4a90e2;
 }
 
-.pregunta-fila label:first-child {
+/* Elimina el CSS problemático y usa esto: */
+.pregunta-fila > label:not([for]) {
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
@@ -1318,3 +1319,7 @@ select option {
     margin-bottom: 8px;
 }
 
+/* Quitar negrita solo de la primera opción del patrón de sueño */
+label[for="sueno_temprano"] {
+    font-weight: normal !important;
+}
