@@ -626,59 +626,61 @@
                             </div>
                         </div>
 
-                        <!-- 12. Tomar el Sol -->
+                        <!-- 12. Aguantar el Sol -->
                         <div class="pregunta-fila">
-                            <label>¿Con qué frecuencia tomas el sol?</label>
+                            <label>¿Aguantas el sol directamente?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="tomar_sol" value="diario" id="sol_diario" onchange="manejarSol()">
-                                <label for="sol_diario">Diario</label>
+                                <input type="radio" name="aguanta_sol" value="si" id="aguanta_sol_si" onchange="toggleAguantarSol()">
+                                <label for="aguanta_sol_si">Sí</label>
                                 
-                                <input type="radio" name="tomar_sol" value="semanal" id="sol_semanal" onchange="manejarSol()">
-                                <label for="sol_semanal">Semanalmente</label>
+                                <input type="radio" name="aguanta_sol" value="no" id="aguanta_sol_no" onchange="toggleAguantarSol()">
+                                <label for="aguanta_sol_no">No</label>
                                 
-                                <input type="radio" name="tomar_sol" value="mensual" id="sol_mensual" onchange="manejarSol()">
-                                <label for="sol_mensual">Mensualmente</label>
-                                
-                                <input type="radio" name="tomar_sol" value="nunca" id="sol_nunca" onchange="manejarSol()">
-                                <label for="sol_nunca">Nunca</label>
-                                
-                                <input type="radio" name="tomar_sol" value="otro" id="sol_otro" onchange="manejarSol()">
-                                <label for="sol_otro">Otro</label>
-                                
-                                <div id="otro-sol-container" style="display: none; margin-top: 10px;">
-                                    <input type="text" id="otro_sol_texto" placeholder="Especifica la frecuencia">
+                                <div id="porque-no-sol-container" style="display: none; margin-top: 15px;">
+                                    <label>¿Por qué?</label>
+                                    <textarea name="porque_no_sol" id="porque_no_sol" placeholder="Explica por qué no aguantas el sol directamente..." rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 13. Cólicos Menstruales (Solo Mujeres) -->
+                        <!-- 13. Menstruación -->
                         <div class="pregunta-fila" id="colicos-container">
-                            <label>¿Sufres de cólicos menstruales? (Solo mujeres)</label>
+                            <label>¿Todavía menstrúas?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="colicos" value="si" id="colicos_si" onchange="toggleColicos()">
-                                <label for="colicos_si">Sí</label>
+                                <input type="radio" name="menstrua" value="si" id="menstrua_si" onchange="toggleMenstruacion()">
+                                <label for="menstrua_si">Sí</label>
                                 
-                                <input type="radio" name="colicos" value="no" id="colicos_no" onchange="toggleColicos()">
-                                <label for="colicos_no">No</label>
+                                <input type="radio" name="menstrua" value="no" id="menstrua_no" onchange="toggleMenstruacion()">
+                                <label for="menstrua_no">No</label>
                                 
-                                <input type="radio" name="colicos" value="no_aplica" id="colicos_na" onchange="toggleColicos()">
-                                <label for="colicos_na">No aplica (Hombre)</label>
+                                <!-- SI MENSTRÚA: Pregunta sobre cólicos -->
+                                <div id="colicos-actuales-container" style="display: none; margin-top: 15px;">
+                                    <label>¿Sufres de cólicos?</label>
+                                    <div style="margin-top: 10px;">
+                                        <input type="radio" name="colicos_actuales" value="si" id="colicos_actuales_si" onchange="toggleColicosActuales()">
+                                        <label for="colicos_actuales_si">Sí</label>
+                                        
+                                        <input type="radio" name="colicos_actuales" value="no" id="colicos_actuales_no" onchange="toggleColicosActuales()">
+                                        <label for="colicos_actuales_no">No</label>
+                                    </div>
+                                    
+                                    <!-- SI TIENE CÓLICOS: Como es el dolor -->
+                                    <div id="dolor-colicos-container" style="display: none; margin-top: 15px;">
+                                        <label>¿Cómo es tu dolor?</label>
+                                        <textarea name="dolor_colicos" id="dolor_colicos" placeholder="Describe cómo es tu dolor de cólicos..." rows="3" style="margin-top: 10px;"></textarea>
+                                    </div>
+                                    
+                                    <!-- SI NO TIENE CÓLICOS: Edad que dejó de menstruar -->
+                                    <div id="edad-sin-colicos-container" style="display: none; margin-top: 15px;">
+                                        <label>¿A qué edad dejaste de menstruar?</label>
+                                        <textarea name="edad_sin_colicos" id="edad_sin_colicos" placeholder="Ej: A los 45 años, hace 5 años aproximadamente, etc." rows="3" style="margin-top: 10px;"></textarea>
+                                    </div>
+                                </div>
                                 
-                                <div id="nivel-dolor-container" style="display: none; margin-top: 10px;">
-                                    <label>Nivel de dolor (1-10):</label>
-                                    <select name="nivel_dolor" id="nivel_dolor">
-                                        <option value="">Selecciona...</option>
-                                        <option value="1">1 - Muy leve</option>
-                                        <option value="2">2 - Leve</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5 - Moderado</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8 - Severo</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10 - Extremo</option>
-                                    </select>
+                                <!-- SI NO MENSTRÚA: Pregunta edad -->
+                                <div id="edad-menopausia-container" style="display: none; margin-top: 15px;">
+                                    <label>¿A qué edad dejaste de menstruar?</label>
+                                    <textarea name="edad_menopausia" id="edad_menopausia" placeholder="Ej: A los 45 años, hace 5 años aproximadamente, etc." rows="3" style="margin-top: 10px;"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -687,34 +689,7 @@
                         <div class="pregunta-fila">
                             <label>¿Cuál es tu patrón de sueño?</label>
                             <div class="respuesta-container">
-                                <label for="sueno_temprano">
-                                    <input type="radio" name="patron_sueno" value="temprano_temprano" id="sueno_temprano" onchange="manejarSueno()">
-                                    Me duermo temprano y despierto temprano
-                                </label>
-                                
-                                <label for="sueno_tarde">
-                                    <input type="radio" name="patron_sueno" value="tarde_tarde" id="sueno_tarde" onchange="manejarSueno()">
-                                    Me duermo tarde y despierto tarde
-                                </label>
-                                
-                                <label for="sueno_mixto1">
-                                    <input type="radio" name="patron_sueno" value="temprano_tarde" id="sueno_mixto1" onchange="manejarSueno()">
-                                    Me duermo temprano pero despierto tarde
-                                </label>
-                                
-                                <label for="sueno_irregular">
-                                    <input type="radio" name="patron_sueno" value="irregular" id="sueno_irregular" onchange="manejarSueno()">
-                                    Horario irregular
-                                </label>
-                                
-                                <label for="sueno_otro">
-                                    <input type="radio" name="patron_sueno" value="otro" id="sueno_otro" onchange="manejarSueno()">
-                                    Otro
-                                </label>
-                                
-                                <div id="otro-sueno-container" style="display: none; margin-top: 10px;">
-                                    <input type="text" id="otro_sueno_texto" placeholder="Describe tu patrón de sueño">
-                                </div>
+                                <textarea name="patron_sueno" id="patron_sueno" placeholder="Ej: Me duermo a las 10pm y despierto a las 6am, tengo insomnio, duermo irregular por trabajo, etc." rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -756,13 +731,6 @@
                                     <label><input type="radio" name="tieneMiedos" value="Si" onchange="toggleMiedos()" required> Sí</label>
                                 </div>
                             </div>
-                            <div class="campo-mitad">
-                                <label>¿Tiene preferencias alimentarias marcadas?</label>
-                                <div class="radio-group-inline">
-                                    <label><input type="radio" name="tienePreferencias" value="No" onchange="togglePreferencias()" required> No</label>
-                                    <label><input type="radio" name="tienePreferencias" value="Si" onchange="togglePreferencias()" required> Sí</label>
-                                </div>
-                            </div>
                         </div>
                     
                         <!-- DETALLES DE MIEDOS (si los tiene) -->
@@ -779,85 +747,7 @@
                             <textarea id="sintomasFisicos" name="sintomasFisicos" placeholder="Ej: Dolores de cabeza, problemas digestivos, cansancio, etc."></textarea>
                         </div>
                     
-                        <!-- SUEÑO Y APETITO -->
-                        <div class="campo-doble">
-                            <div class="campo-mitad">
-                                <label for="patronSueno">Patrón de sueño:</label>
-                                <select id="patronSueno" name="patronSueno">
-                                    <option value="">Seleccionar</option>
-                                    <option value="Duerme bien">Duerme bien (7-8 horas)</option>
-                                    <option value="Insomnio inicial">Dificultad para conciliar</option>
-                                    <option value="Insomnio intermedio">Se despierta frecuentemente</option>
-                                    <option value="Insomnio terminal">Se despierta muy temprano</option>
-                                    <option value="Sueño no reparador">Duerme pero no descansa</option>
-                                    <option value="Hipersomnia">Duerme demasiado</option>
-                                </select>
-                            </div>
-                            <div class="campo-mitad">
-                                <label for="apetito">Apetito:</label>
-                                <select id="apetito" name="apetito">
-                                    <option value="">Seleccionar</option>
-                                    <option value="Normal">Normal</option>
-                                    <option value="Aumentado">Aumentado</option>
-                                    <option value="Disminuido">Disminuido</option>
-                                    <option value="Caprichoso">Caprichoso/Variable</option>
-                                    <option value="Sin apetito">Sin apetito</option>
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <!-- PREFERENCIAS ALIMENTARIAS DETALLADAS (si las tiene) -->
-                        <div id="datosPreferencias" style="display: none;">
-                            <!-- SALADO Y DULCE -->
-                            <div class="campo-doble">
-                                <div class="campo-mitad">
-                                    <label for="prefiereSalado">Prefiere salado:</label>
-                                    <select id="prefiereSalado" name="prefiereSalado">
-                                        <option value="">No específico</option>
-                                        <option value="Mucho">Mucho</option>
-                                        <option value="Poco">Poco</option>
-                                        <option value="Nada">Nada</option>
-                                    </select>
-                                </div>
-                                <div class="campo-mitad">
-                                    <label for="prefiereDulce">Prefiere dulce:</label>
-                                    <select id="prefiereDulce" name="prefiereDulce">
-                                        <option value="">No específico</option>
-                                        <option value="Mucho">Mucho</option>
-                                        <option value="Poco">Poco</option>
-                                        <option value="Nada">Nada</option>
-                                    </select>
-                                </div>
-                            </div>
-                    
-                            <!-- CALIENTE Y FRÍO -->
-                            <div class="campo-doble">
-                                <div class="campo-mitad">
-                                    <label for="prefiereCaliente">Prefiere comidas calientes:</label>
-                                    <select id="prefiereCaliente" name="prefiereCaliente">
-                                        <option value="">No específico</option>
-                                        <option value="Siempre">Siempre</option>
-                                        <option value="A veces">A veces</option>
-                                        <option value="Nunca">Nunca</option>
-                                    </select>
-                                </div>
-                                <div class="campo-mitad">
-                                    <label for="prefiereFrio">Prefiere comidas frías:</label>
-                                    <select id="prefiereFrio" name="prefiereFrio">
-                                        <option value="">No específico</option>
-                                        <option value="Siempre">Siempre</option>
-                                        <option value="A veces">A veces</option>
-                                        <option value="Nunca">Nunca</option>
-                                    </select>
-                                </div>
-                            </div>
-                    
-                            <!-- OTRAS PREFERENCIAS -->
-                            <div class="campo">
-                                <label for="otrasPreferencias">Otras preferencias alimentarias:</label>
-                                <textarea id="otrasPreferencias" name="otrasPreferencias" placeholder="Ej: Evita lácteos, le gusta mucho el picante, etc."></textarea>
-                            </div>
-                        </div>
+
                     
                         <!-- ESTADO EMOCIONAL -->
                         <div class="campo">

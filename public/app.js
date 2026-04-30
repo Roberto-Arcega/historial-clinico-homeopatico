@@ -205,8 +205,7 @@ function limpiarSeccionDirecta(seccionIndex) {
             ],
             3: [
                 'motivoConsulta', 'tiempoEvolucion', 'caracter', 'listaMiedos',
-                'sintomasFisicos', 'patronSueno', 'apetito', 'prefiereSalado',
-                'prefiereDulce', 'prefiereCaliente', 'prefiereFrio', 'otrasPreferencias',
+                'sintomasFisicos',
                 'estadoEmocional', 'mejoraCon', 'empeoraCon'
             ]
         };
@@ -2016,19 +2015,6 @@ function toggleOtroSol() {
     }
 }
 
-// 12. Cólicos - nivel de dolor
-function toggleColicos() {
-    const colicosSi = document.getElementById('colicos_si');
-    const nivelContainer = document.getElementById('nivel-dolor-container');
-    
-    if (colicosSi.checked) {
-        nivelContainer.style.display = 'block';
-    } else {
-        nivelContainer.style.display = 'none';
-        document.getElementById('nivel_dolor').value = '';
-    }
-}
-
 // 13. Patrón de sueño - campo "otro"
 function toggleOtroSueno() {
     const suenoOtro = document.getElementById('sueno_otro');
@@ -2097,16 +2083,69 @@ function manejarSol() {
     }
 }
 
-// 4. Función para patrón de sueño
-function manejarSueno() {
-    const otroRadio = document.getElementById('sueno_otro');
-    const otroContainer = document.getElementById('otro-sueno-container');
-    const otroTexto = document.getElementById('otro_sueno_texto');
+function toggleAguantarSol() {
+    const siSelected = document.getElementById('aguanta_sol_si').checked;
+    const noSelected = document.getElementById('aguanta_sol_no').checked;
+    const container = document.getElementById('porque-no-sol-container');
     
-    if (otroRadio.checked) {
-        otroContainer.style.display = 'block';
+    if (noSelected) {
+        container.style.display = 'block';
     } else {
-        otroContainer.style.display = 'none';
-        otroTexto.value = '';
+        container.style.display = 'none';
+        // Limpiar textarea si cambia a "Sí"
+        document.getElementById('porque_no_sol').value = '';
+    }
+}
+
+function toggleMenstruacion() {
+    const siSelected = document.getElementById('menstrua_si').checked;
+    const noSelected = document.getElementById('menstrua_no').checked;
+    
+    const colicosContainer = document.getElementById('colicos-actuales-container');
+    const edadContainer = document.getElementById('edad-menopausia-container');
+    
+    // Ocultar todos los containers
+    colicosContainer.style.display = 'none';
+    edadContainer.style.display = 'none';
+    document.getElementById('dolor-colicos-container').style.display = 'none';
+    document.getElementById('edad-sin-colicos-container').style.display = 'none';
+    
+    // Limpiar todos los campos
+    document.getElementById('colicos_actuales_si').checked = false;
+    document.getElementById('colicos_actuales_no').checked = false;
+    document.getElementById('edad_menopausia').value = '';
+    document.getElementById('dolor_colicos').value = '';
+    document.getElementById('edad_sin_colicos').value = '';
+    
+    if (siSelected) {
+        // Si menstrúa → mostrar pregunta de cólicos
+        colicosContainer.style.display = 'block';
+    } else if (noSelected) {
+        // Si no menstrúa → mostrar pregunta de edad
+        edadContainer.style.display = 'block';
+    }
+}
+
+function toggleColicosActuales() {
+    const siColicos = document.getElementById('colicos_actuales_si').checked;
+    const noColicos = document.getElementById('colicos_actuales_no').checked;
+    
+    const dolorContainer = document.getElementById('dolor-colicos-container');
+    const edadSinColicosContainer = document.getElementById('edad-sin-colicos-container');
+    
+    // Ocultar ambos containers
+    dolorContainer.style.display = 'none';
+    edadSinColicosContainer.style.display = 'none';
+    
+    // Limpiar campos
+    document.getElementById('dolor_colicos').value = '';
+    document.getElementById('edad_sin_colicos').value = '';
+    
+    if (siColicos) {
+        // Sí tiene cólicos → pregunta cómo es el dolor
+        dolorContainer.style.display = 'block';
+    } else if (noColicos) {
+        // No tiene cólicos → pregunta edad
+        edadSinColicosContainer.style.display = 'block';
     }
 }
