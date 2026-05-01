@@ -102,10 +102,9 @@ function limpiarSeccion(seccionIndex) {
             resetearContenedoresDinamicos(seccion);
             
             // Limpiar campos específicos por sección
-// Función auxiliar para limpiar campos específicos por sección (ACTUALIZADA)
+// Función auxiliar para limpiar campos específicos por sección (SOLUCIÓN FINAL)
 function limpiarCamposEspecificosPorSeccion(seccionIndex) {
     switch(seccionIndex) {
-// Agregar a la función limpiarSeccionRapida en el case 0:
         case 0:
             // Resetear ocupación específica
             toggleOcupacionEspecifica();
@@ -115,38 +114,52 @@ function limpiarCamposEspecificosPorSeccion(seccionIndex) {
             document.getElementById('queEstudia').value = '';
             document.getElementById('cualPuesto').value = '';
             document.getElementById('queVende').value = '';
+            
+            // FORZAR ocultamiento menstruación DIRECTAMENTE
+            document.getElementById('colicos-container').style.display = 'none';
+            limpiarCamposMenstruacion();
             break;
-        case 1:
-            // Resetear hermanos/hijos/nietos
+            
+        case 1: // Información Familiar
             document.getElementById('hermanosContainer').innerHTML = '';
             document.getElementById('hijosContainer').innerHTML = '';
             document.getElementById('nietosContainer').innerHTML = '';
             
-            // Ocultar convivencia
-            document.getElementById('convivenciaPadres').style.display = 'none';
-            document.getElementById('convivenciaHijos').style.display = 'none';
-            
-            // Ocultar causas de muerte padres
             document.getElementById('causaMuertePadre').style.display = 'none';
             document.getElementById('causaMuerteMadre').style.display = 'none';
-            
-            // Ocultar pregunta abortos
+            document.getElementById('convivenciaPadres').style.display = 'none';
             document.getElementById('preguntaAbortos').style.display = 'none';
+            document.getElementById('convivenciaHijos').style.display = 'none';
+            break;
+            
+        case 2: // Hábitos y Estilo de Vida
+            const contenedoresHabitos = [
+                'otros-dulce-container', 'otros-salada-container', 
+                'ejercicio-frecuencia-container', 'problemas-intestino-detalle',
+                'inflamacion-horario', 'gases-horario', 'frecuencia-intestinal-container',
+                'frecuencia-sexual-container', 'olor-fuerte-container', 
+                'porque-no-sol-container', 'colicos-actuales-container',
+                'dolor-colicos-container', 'edad-sin-colicos-container',
+                'edad-menopausia-container'
+            ];
+            
+            contenedoresHabitos.forEach(id => {
+                const elemento = document.getElementById(id);
+                if (elemento) {
+                    elemento.style.display = 'none';
+                }
+            });
+            break;
+            
+        case 3: // Perfil Homeopático
+            document.getElementById('datosMiedos').style.display = 'none';
             break;
     }
-}
-            
-            // Actualizar estados visuales
-            setTimeout(() => {
-                actualizarEstadoSeccion(seccionIndex);
-                console.log('Estado actualizado para sección:', seccionIndex);
-            }, 200);
-            
-            alert('✅ SECCIÓN LIMPIADA CORRECTAMENTE');
-        } else {
-            console.error('No se encontró la sección:', seccionIndex);
-        }
-    }
+    
+    // Actualizar estado sin alert
+    setTimeout(() => {
+        actualizarEstadoSeccion(seccionIndex);
+    }, 50);
 }
 
 // Función auxiliar para resetear contenedores dinámicos
@@ -320,16 +333,16 @@ async function guardarHistorial(e) {
         const formData = new FormData(e.target);
         const data = {};
         
+        // Recopilar datos básicos del formulario
         for (let [key, value] of formData.entries()) {
             data[key] = value;
         }
         
-        if (data.ocupacion === 'otro' && data.ocupacionOtra) {
-            data.ocupacion = data.ocupacionOtra;
-            delete data.ocupacionOtra;
-        }
+        // AGREGAR CAMPOS DE RADIO BUTTONS MANUALMENTE (NUEVOS CAMPOS)
+        data.temperatura_corporal = document.querySelector('input[name="temperatura_corporal"]:checked')?.value || '';
+        data.clima_preferido = document.querySelector('input[name="clima_preferido"]:checked')?.value || '';
         
-                // Manejar campos específicos de ocupación
+        // Manejar campos específicos de ocupación
         if (data.ocupacion === 'Estudiante' && data.queEstudia) {
             data.detalleOcupacion = data.queEstudia;
             delete data.queEstudia;
@@ -341,6 +354,7 @@ async function guardarHistorial(e) {
             delete data.queVende;
         }
         
+        // Manejar ocupación "otro" (CÓDIGO LIMPIO - eliminé duplicado)
         if (data.ocupacion === 'otro' && data.ocupacionOtra) {
             data.ocupacion = data.ocupacionOtra;
             delete data.ocupacionOtra;
@@ -356,14 +370,33 @@ async function guardarHistorial(e) {
         mostrarModalExito();
         e.target.reset();
         
-        // Ocultar contenedores dinámicos
+        // Ocultar TODOS los contenedores dinámicos (ACTUALIZADO)
         const contenedores = [
+            // Sección 1 - Datos personales
             '#datosConyuge', '#ocupacionOtraContainer', '#datosRecomendacion',
+            '#detalleEstudianteContainer', '#detalleTrabajadorContainer', '#detalleComerciante',
+            
+            // Sección 2 - Antecedentes familiares
             '#datosHermanos', '#datosHijos', '#datosNietos',
             '#hermanosContainer', '#hijosContainer', '#nietosContainer',
+            '#convivenciaPadres', '#convivenciaHijos', 
+            '#causaMuertePadre', '#causaMuerteMadre', '#preguntaAbortos',
+            '#datosCasado', '#datosExConyuge', '#datosViudo',
+            
+            // Sección 3 - Historial médico
             '#datosCirugias', '#datosMedicamentos', '#datosAlergias',
-            '#datosHospitalizaciones', '#datosCronicas', '#datosMiedos', '#datosPreferencias',
-            '#preguntaAbortos'
+            '#datosHospitalizaciones', '#datosCronicas',
+            
+            // Sección 4 - Perfil homeopático
+            '#datosMiedos', '#datosPreferencias',
+            
+            // NUEVOS CONTENEDORES SECCIÓN 3 - Hábitos y estilo de vida
+            '#otros-dulce-container', '#otros-salada-container',
+            '#ejercicio-frecuencia-container', '#problemas-intestino-detalle',
+            '#inflamacion-horario', '#gases-horario', '#frecuencia-intestinal-container',
+            '#frecuencia-sexual-container', '#olor-fuerte-container',
+            '#porque-no-sol-container', '#colicos-actuales-container',
+            '#dolor-colicos-container', '#edad-menopausia-container', '#edad-sin-colicos-container'
         ];
         
         contenedores.forEach(selector => {
@@ -1096,7 +1129,7 @@ function limpiarSeccionRapida(seccionIndex) {
     }, 100);
 }
 
-// FUNCIÓN LIMPIAR TODO CON COLAPSO (ACTUALIZADA)
+// FUNCIÓN LIMPIAR TODO RÁPIDO (SINTAXIS CORREGIDA)
 function limpiarTodoRapido() {
     event.stopPropagation();
     event.preventDefault();
@@ -1106,7 +1139,9 @@ function limpiarTodoRapido() {
     
     // Limpiar contenedores dinámicos específicos
     const contenedoresDinamicos = [
-        'hermanosContainer', 'hijosContainer', 'nietosContainer'
+        'hermanosContainer',
+        'hijosContainer', 
+        'nietosContainer'
     ];
     
     contenedoresDinamicos.forEach(id => {
@@ -1116,12 +1151,23 @@ function limpiarTodoRapido() {
         }
     });
     
+    // Ocultar pregunta de menstruación
+    document.getElementById('colicos-container').style.display = 'none';
+    limpiarCamposMenstruacion();
+    
     // Ocultar contenedores condicionales
     const contenedores = [
-        '#datosConyuge', '#ocupacionOtraContainer', '#datosRecomendacion',
-        '#datosCirugias', '#datosMedicamentos', '#datosAlergias', 
-        '#datosHospitalizaciones', '#datosCronicas', '#datosMiedos', 
-        '#datosPreferencias', '#preguntaAbortos'
+        '#datosConyuge',
+        '#ocupacionOtraContainer', 
+        '#datosRecomendacion',
+        '#datosCirugias',
+        '#datosMedicamentos',
+        '#datosAlergias',
+        '#datosHospitalizaciones',
+        '#datosCronicas',
+        '#datosMiedos',
+        '#datosPreferencias',
+        '#preguntaAbortos'
     ];
     
     contenedores.forEach(selector => {
@@ -1901,18 +1947,47 @@ function toggleEjercicio() {
     }
 }
 
-// 4. Clima - campo "otro"
-function toggleOtroClima() {
-    const climaOtro = document.getElementById('clima_otro');
-    const otroContainer = document.getElementById('otro-clima-container');
+function recopilarDatos() {
+    const formData = new FormData(document.getElementById('historialForm'));
+    const data = {};
     
-    if (climaOtro.checked) {
-        otroContainer.style.display = 'block';
-    } else {
-        otroContainer.style.display = 'none';
-        document.getElementById('otro_clima_texto').value = '';
+    // Recopilar todos los campos del formulario
+    for (let [key, value] of formData.entries()) {
+        data[key] = value;
     }
+    
+    // SECCIÓN 3 - Agregar campos de radio buttons manualmente
+    data.temperatura_corporal = document.querySelector('input[name="temperatura_corporal"]:checked')?.value || '';
+    data.clima_preferido = document.querySelector('input[name="clima_preferido"]:checked')?.value || '';
+    
+    return data;
 }
+
+function validarSeccion3() {
+    // Validaciones existentes de la sección 3
+    const motivoConsulta = document.getElementById('motivoConsulta').value;
+    if (!motivoConsulta.trim()) {
+        alert('Por favor complete el motivo de consulta.');
+        return false;
+    }
+    
+    // NUEVAS VALIDACIONES para campos agregados
+    const temperaturaCorporal = document.querySelector('input[name="temperatura_corporal"]:checked');
+    if (!temperaturaCorporal) {
+        alert('Por favor selecciona si tiendes a ser caluroso o friolento.');
+        return false;
+    }
+    
+    const climaPreferido = document.querySelector('input[name="clima_preferido"]:checked');
+    if (!climaPreferido) {
+        alert('Por favor selecciona qué clima prefieres.');
+        return false;
+    }
+    
+    return true;
+}
+
+
 
 // 5. Problemas intestinales - sub-preguntas
 function toggleProblemasIntestino() {
@@ -2148,4 +2223,40 @@ function toggleColicosActuales() {
         // No tiene cólicos → pregunta edad
         edadSinColicosContainer.style.display = 'block';
     }
+}
+
+// Función para mostrar/ocultar preguntas de menstruación según el sexo
+function togglePreguntasMenstruacion() {
+    const sexoSeleccionado = document.querySelector('input[name="sexo"]:checked');
+    const preguntaMenstruacion = document.getElementById('colicos-container');
+    
+    // Solo mostrar si hay sexo seleccionado Y es femenino
+    if (sexoSeleccionado && sexoSeleccionado.value === 'Femenino') {
+        preguntaMenstruacion.style.display = 'block';
+    } else {
+        // Ocultar si no hay selección O es masculino
+        preguntaMenstruacion.style.display = 'none';
+        limpiarCamposMenstruacion();
+    }
+}
+
+// Función auxiliar para limpiar campos de menstruación
+function limpiarCamposMenstruacion() {
+    // Limpiar radio buttons de menstruación
+    const radiosMenstrua = document.querySelectorAll('input[name="menstrua"]');
+    radiosMenstrua.forEach(radio => radio.checked = false);
+    
+    const radiosColicos = document.querySelectorAll('input[name="colicos_actuales"]');
+    radiosColicos.forEach(radio => radio.checked = false);
+    
+    // Limpiar textareas
+    document.getElementById('dolor_colicos').value = '';
+    document.getElementById('edad_sin_colicos').value = '';
+    document.getElementById('edad_menopausia').value = '';
+    
+    // Ocultar contenedores dependientes
+    document.getElementById('colicos-actuales-container').style.display = 'none';
+    document.getElementById('dolor-colicos-container').style.display = 'none';
+    document.getElementById('edad-sin-colicos-container').style.display = 'none';
+    document.getElementById('edad-menopausia-container').style.display = 'none';
 }

@@ -104,11 +104,10 @@
                             <div class="campo-mitad">
                                 <label>Sexo:</label>
                                 <div class="radio-group-inline">
-                                    <label><input type="radio" name="sexo" value="Masculino" required> Masculino</label>
-                                    <label><input type="radio" name="sexo" value="Femenino" required> Femenino</label>
+                                    <label><input type="radio" name="sexo" value="Masculino" onchange="togglePreguntasMenstruacion()" required> Masculino</label>
+                                    <label><input type="radio" name="sexo" value="Femenino" onchange="togglePreguntasMenstruacion()" required> Femenino</label>
                                 </div>
                             </div>
-                        </div>
                     
                          <!-- OCUPACIÓN Y ESTADO CIVIL -->
                         <div class="campo-doble">
@@ -470,31 +469,27 @@
                             </div>
                         </div>
 
-                        <!-- 6. Clima Preferido -->
+                        <!-- REEMPLAZAR: ¿Tiendes a ser Caluroso o Friolento? -->
+                        <div class="pregunta-fila">
+                            <label>¿Tiendes a ser Caluroso o Friolento?</label>
+                            <div class="respuesta-container">
+                                <input type="radio" name="temperatura_corporal" value="caluroso" id="temp_caluroso">
+                                <label for="temp_caluroso">Caluroso</label>
+                                
+                                <input type="radio" name="temperatura_corporal" value="friolento" id="temp_friolento">
+                                <label for="temp_friolento">Friolento</label>
+                            </div>
+                        </div>
+
+                        <!-- REEMPLAZAR: ¿Qué clima prefieres? -->
                         <div class="pregunta-fila">
                             <label>¿Qué clima prefieres?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="clima" value="calido" id="clima_calido" onchange="toggleOtroClima()">
+                                <input type="radio" name="clima_preferido" value="calido" id="clima_calido">
                                 <label for="clima_calido">Cálido</label>
                                 
-                                <input type="radio" name="clima" value="frio" id="clima_frio" onchange="toggleOtroClima()">
+                                <input type="radio" name="clima_preferido" value="frio" id="clima_frio">
                                 <label for="clima_frio">Frío</label>
-                                
-                                <input type="radio" name="clima" value="templado" id="clima_templado" onchange="toggleOtroClima()">
-                                <label for="clima_templado">Templado</label>
-                                
-                                <input type="radio" name="clima" value="humedo" id="clima_humedo" onchange="toggleOtroClima()">
-                                <label for="clima_humedo">Húmedo</label>
-                                
-                                <input type="radio" name="clima" value="seco" id="clima_seco" onchange="toggleOtroClima()">
-                                <label for="clima_seco">Seco</label>
-                                
-                                <input type="radio" name="clima" value="otro" id="clima_otro" onchange="toggleOtroClima()">
-                                <label for="clima_otro">Otro</label>
-                                
-                                <div id="otro-clima-container" style="display: none; margin-top: 10px;">
-                                    <input type="text" id="otro_clima_texto" placeholder="Especifica el clima que prefieres">
-                                </div>
                             </div>
                         </div>
 
