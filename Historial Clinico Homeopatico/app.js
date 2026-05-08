@@ -2084,12 +2084,31 @@ function toggleFrecuenciaIntestinal() {
 function toggleVidaSexual() {
     const sexualSi = document.getElementById('sexual_si');
     const frecuenciaContainer = document.getElementById('frecuencia-sexual-container');
-    
+
     if (sexualSi.checked) {
         frecuenciaContainer.style.display = 'block';
     } else {
         frecuenciaContainer.style.display = 'none';
         document.getElementById('frecuencia_sexual').value = '';
+    }
+}
+
+// 9.1 Hemorroides - sangrado y sensación
+function toggleHemorroides() {
+    const hemorroidesSi = document.getElementById('hemorroides_si');
+    const detalleContainer = document.getElementById('hemorroides-detalle-container');
+
+    if (hemorroidesSi.checked) {
+        detalleContainer.style.display = 'block';
+    } else {
+        detalleContainer.style.display = 'none';
+        // Limpiar campos al seleccionar "No"
+        const sangranSi = document.getElementById('hemorroides_sangran_si');
+        const sangranNo = document.getElementById('hemorroides_sangran_no');
+        if (sangranSi) sangranSi.checked = false;
+        if (sangranNo) sangranNo.checked = false;
+        const sensacion = document.getElementById('hemorroides_sensacion');
+        if (sensacion) sensacion.value = '';
     }
 }
 
