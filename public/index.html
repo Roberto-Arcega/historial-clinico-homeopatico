@@ -465,6 +465,9 @@
                                         <option value="1-2_semana">1-2 veces por semana</option>
                                         <option value="ocasional">Ocasionalmente</option>
                                     </select>
+
+                                    <label for="ejercicio_tipo" style="margin-top: 10px; display: block;">¿Qué ejercicio hace?</label>
+                                    <textarea name="ejercicio_tipo" id="ejercicio_tipo" rows="3" placeholder="Ej. correr, caminar, ejercicios de fuerza, yoga, pilates, natación, ciclismo, baile, etc."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -568,11 +571,25 @@
                         <div class="pregunta-fila">
                             <label>¿Padeces hemorroides?</label>
                             <div class="respuesta-container">
-                                <input type="radio" name="hemorroides" value="si" id="hemorroides_si">
+                                <input type="radio" name="hemorroides" value="si" id="hemorroides_si" onchange="toggleHemorroides()">
                                 <label for="hemorroides_si">Sí</label>
-                                
-                                <input type="radio" name="hemorroides" value="no" id="hemorroides_no">
+
+                                <input type="radio" name="hemorroides" value="no" id="hemorroides_no" onchange="toggleHemorroides()">
                                 <label for="hemorroides_no">No</label>
+
+                                <div id="detalle-hemorroides-container" style="display: none; margin-top: 10px;">
+                                    <label>¿Sangran o no sangran?</label>
+                                    <div class="respuesta-container">
+                                        <input type="radio" name="hemorroides_sangrado" value="si" id="hemorroides_sangran_si">
+                                        <label for="hemorroides_sangran_si">Sí, sangran</label>
+
+                                        <input type="radio" name="hemorroides_sangrado" value="no" id="hemorroides_sangran_no">
+                                        <label for="hemorroides_sangran_no">No sangran</label>
+                                    </div>
+
+                                    <label for="hemorroides_sensacion" style="margin-top: 10px; display: block;">¿Qué sensación tienes de la hemorroide?</label>
+                                    <textarea name="hemorroides_sensacion" id="hemorroides_sensacion" rows="3" placeholder="Ej. comezón, picazón, ardor, dolor punzante, sensación de quemadura, presión, etc."></textarea>
+                                </div>
                             </div>
                         </div>
 
@@ -760,6 +777,12 @@
                                 <label for="empeoraCon">Sus síntomas empeoran con:</label>
                                 <textarea id="empeoraCon" name="empeoraCon" placeholder="Ej: Estrés, frío, calor, humedad, ruidos, etc."></textarea>
                             </div>
+                        </div>
+
+                        <!-- ÚLTIMA FIEBRE -->
+                        <div class="campo">
+                            <label for="ultimaFiebre">¿Cuándo fue tu última fiebre?</label>
+                            <textarea id="ultimaFiebre" name="ultimaFiebre" placeholder="Ej: Hace 2 semanas, hace 3 meses, el año pasado, no recuerdo, nunca, etc."></textarea>
                         </div>
                     </div>
                 </section>

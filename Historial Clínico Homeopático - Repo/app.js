@@ -1964,16 +1964,18 @@ function toggleOtrosSalada() {
     }
 }
 
-// 3. Ejercicio - frecuencia
+// 3. Ejercicio - frecuencia y tipo
 function toggleEjercicio() {
     const ejercicioSi = document.getElementById('ejercicio_si');
     const frecuenciaContainer = document.getElementById('ejercicio-frecuencia-container');
-    
+
     if (ejercicioSi.checked) {
         frecuenciaContainer.style.display = 'block';
     } else {
         frecuenciaContainer.style.display = 'none';
         document.getElementById('ejercicio_frecuencia').value = '';
+        const ejercicioTipo = document.getElementById('ejercicio_tipo');
+        if (ejercicioTipo) ejercicioTipo.value = '';
     }
 }
 
@@ -2093,16 +2095,16 @@ function toggleVidaSexual() {
     }
 }
 
-// 9.1 Hemorroides - sangrado y sensación
+// 9b. Hemorroides - detalle (sangrado y sensación)
 function toggleHemorroides() {
     const hemorroidesSi = document.getElementById('hemorroides_si');
-    const detalleContainer = document.getElementById('hemorroides-detalle-container');
+    const detalleContainer = document.getElementById('detalle-hemorroides-container');
 
     if (hemorroidesSi.checked) {
         detalleContainer.style.display = 'block';
     } else {
         detalleContainer.style.display = 'none';
-        // Limpiar campos al seleccionar "No"
+        // Limpiar los campos al ocultar
         const sangranSi = document.getElementById('hemorroides_sangran_si');
         const sangranNo = document.getElementById('hemorroides_sangran_no');
         if (sangranSi) sangranSi.checked = false;
